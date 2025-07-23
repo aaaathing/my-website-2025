@@ -1,4 +1,4 @@
 collections:
-  blog:
+  posts:
     output: true
-    permalink: /blog/:path/
+    permalink: /posts/:path/
