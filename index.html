@@ -4,7 +4,7 @@ title: "Home"
 ---
 
 <div>
-  {% assign posts = site.posts | where: "layout", "post" %}
+  {% assign posts = site.pages | where: "layout", "post" %}
   {% for post in posts %}
     <div style="margin-bottom:16px; padding:16px; border: 1px solid gray;">
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a><br>
