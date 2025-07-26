@@ -12,9 +12,13 @@ The terrain will have tall mountains and valleys and long rivers. The forests ar
 
 ## What I want the game to be like
 
-<a href="https://www.youtube.com/watch?v=1wufuXY3l1o"><img src="https://i.ytimg.com/vi/1wufuXY3l1o/hq720.jpg" loading="lazy"><img src="https://pbs.twimg.com/media/EwSl3TWVkAYDx1M?format=jpg&name=large" loading="lazy"></a>
+<a href="https://www.youtube.com/watch?v=1wufuXY3l1o"><img src="https://i.ytimg.com/vi/1wufuXY3l1o/hq720.jpg" style="filter:brightness(1.25)" loading="lazy"><img src="https://pbs.twimg.com/media/EwSl3TWVkAYDx1M?format=jpg&name=large" style="filter:brightness(1.25)" loading="lazy"></a>
 
-<a href="https://forum.luanti.org/viewtopic.php?t=25683"><img src="https://user-images.githubusercontent.com/6905002/99192695-79e9ff00-2774-11eb-9b78-3a4bc4c78217.png" loading="lazy"><img src="https://forum.luanti.org/download/file.php?mode=view&id=24732" loading="lazy"></a>
+<a href="https://forum.luanti.org/viewtopic.php?t=25683"><img src="https://user-images.githubusercontent.com/6905002/99192695-79e9ff00-2774-11eb-9b78-3a4bc4c78217.png" style="filter:brightness(1.5)" loading="lazy"><img src="https://forum.luanti.org/download/file.php?mode=view&id=24732" style="filter:brightness(1.5)" loading="lazy"></a>
+
+<a href="https://www.youtube.com/watch?v=Hc3sb6lx0ag"><img src="https://i.ytimg.com/vi/Hc3sb6lx0ag/hq720.jpg" loading="lazy"></a>
+
+<img src="https://digital4planet.org/wp-content/uploads/sites/83/2021/05/old-growth-forest-with-rotting-tree-trunk-covered-3Y39CX3-1.jpg" style="filter:brightness(1.25)" loading="lazy"><img src="https://assets.simpleviewinc.com/simpleview/image/upload//v1/clients/roanoke/SV11033107V_431_e585f91b-359b-44f4-93b9-70b310b7b3dc.jpg" loading="lazy">
 
 to add: more example images
 
