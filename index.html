@@ -41,10 +41,12 @@ title: Home
       <div>
         {% assign posts = site.pages | where: "layout", "post" | reverse %}
         {% for post in posts %}
-          <div style="margin-bottom:16px; padding:16px; border: 1px solid gray;">
-            <a href="{{ post.url | relative_url }}">{{ post.title }}</a><br>
-            <span style="opacity:0.5">{{ post.date | date_to_string }}</span>
-          </div>
+          <a href="{{ post.url | relative_url }}">
+            <div style="margin-bottom:16px; padding:16px; border: 1px solid gray;">
+              {{ post.title }} <br>
+              <span style="opacity:0.5">{{ post.date | date_to_string }}</span>
+            </div>
+          </a>
         {% endfor %}
       </div>
     </div>
