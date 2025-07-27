@@ -1,17 +1,52 @@
 ---
+title: Home
 ---
 
-<h1>thingmaker's website</h1>
-Since Jul 2025<br>
-<a href="https://thingmaker.us.eu.org">My previous website</a><br>
-Profiles: <a href="https://scratch.mit.edu/users/2-people">scratch</a> | <a href="https://replit.com/@thingMaker">replit</a> | <a href="https://github.com/aaaathing/">github</a><br>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div>
-  {% assign posts = site.pages | where: "layout", "post" | reverse %}
-  {% for post in posts %}
-    <div style="margin-bottom:16px; padding:16px; border: 1px solid gray;">
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a><br>
-      <span style="opacity:0.5">{{ post.date | date_to_string }}</span>
+    {% seo %}
+    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
+  </head>
+  <body>
+    <style>
+      /* Header/logo Title */
+      .header {
+        padding: 80px;
+        text-align: center;
+        background: #ffbd61;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        color: rgb(95, 73, 0);
+      }
+
+      /* Increase the font size of the heading */
+      .header h1 {
+        font-size: 40px;
+      }
+    </style>
+    <div class="markdown-body header">
+      <h1>thingmaker's website 2025</h1>
+      Since Jul 2025<br>
+      <a href="https://thingmaker.us.eu.org">Old website</a><br>
+      Profiles: <a href="https://scratch.mit.edu/users/2-people">scratch</a> | <a href="https://replit.com/@thingMaker">replit</a> | <a href="https://github.com/aaaathing/">github</a><br>
     </div>
-  {% endfor %}
-</div>
+    
+    <div class="container-lg px-3 my-5 markdown-body">
+
+      <div>
+        {% assign posts = site.pages | where: "layout", "post" | reverse %}
+        {% for post in posts %}
+          <div style="margin-bottom:16px; padding:16px; border: 1px solid gray;">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a><br>
+            <span style="opacity:0.5">{{ post.date | date_to_string }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

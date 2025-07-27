@@ -66,7 +66,9 @@ The player is also made of voxels. They interact with the world physically. To m
 
 There could be a picture of the player in the top left. If a part was hit, it flashes red. (like in Minecraft but more detailed) If a part is seperated or gone, it is transparent.
 
-How it can generate terrain: It generates a base noise map. It can use perlin noise or simplex noise. Another kind of noise is a kind of voronoi noise but each cell has a random height and it interpolates (smoothes) it. ![](https://iquilezles.org/articles/voronoise/gfx01.jpg) Another kind of noise is white noise that is low frequency filtered. After generating noise, it can do erosion simulation on the noise map. [Erosion](https://nickmcd.me/2022/04/15/soilmachine/)
+How it can generate terrain: It generates a base noise map. It can use perlin noise or simplex noise. Another kind of noise is a kind of voronoi noise but each cell has a random height and it interpolates (smoothes) it. ![](https://iquilezles.org/articles/voronoise/gfx01.jpg) Another kind of noise is white noise that is low frequency filtered. After generating noise, it can do erosion simulation on the noise map. [Erosion](https://nickmcd.me/2022/04/15/soilmachine/) [Rivers](https://forum.luanti.org/viewtopic.php?t=25683)
+
+Every tree can have their own biome definition. This way, there won't be sudden changes in biomes. [Map gen](https://forum.luanti.org/viewtopic.php?t=11430)
 
 It will have multiplayer, so there will be other players. But how will the physics be done? It is better to run physics on the server, because it will be simpler. This may have a delay when players try to move. Running physics on client side would be smoother and have less delay, but it would need more code and the server would need to check if it moves correctly and synchronize.
 
