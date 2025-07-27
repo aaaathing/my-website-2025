@@ -1,7 +1,8 @@
 ---
 layout: post
-title: "the voxel game i wanted to make"
+title: "The voxel game I wanted to make"
 date: 2025-07-25
+author: thingmaker (aaaathing)
 ---
 
 # The voxel game I wanted to make

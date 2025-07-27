@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% seo %}
+    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
+  </head>
+  <body>
+    <style>
+      .nav{
+        background: #ffbd61;
+        text-align: center;
+      }
+      .nav a {
+        display:inline-block;
+        padding:16px;
+      }
+    </style>
+		
+    <div class="markdown-body nav">
+      <a href="{{ '/' | relative_url }}">My website</a>
+    </div>
+    <div class="container-lg px-3 my-5 markdown-body">
+      {% if page.date %}
+      <span style="opacity:0.5">{{ page.date | date_to_string }}</span>
+      {% if page.author %}
+      {% endif %}
+      <span style="opacity:0.5">by {{ page.author }}</span>
+      {% endif %}
+      
+      {{ content }}
+    </div>
+  </body>
+</html>
