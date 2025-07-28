@@ -58,7 +58,8 @@ Rivers can also flow in real time. The rivers flow from mountains and combine an
 
 Around Mar 2024: I thought about small voxels but in a new game. It could load chunks that had water flowing to already loaded chunks, to keep rivers flowing. While going downhill on the trail, I thought that further chunks could be simulated slower.
 
-Tree and plants could grow in real time too. The branches get thicker over time, and new branches grow longer and grow leaves and buds. (types: oak leaf, oak bud, oak wood, oak bud growing, etc.) In autumn, the leaves fall onto the ground, and decay (disappear). Seeds can also fall and grow into new trees if there is enough space.
+Tree and plants could grow in real time too. The branches get thicker over time, and new branches grow longer and grow leaves and buds. (types: oak leaf, oak bud, oak wood, oak bud growing, etc.) In autumn, the leaves fall onto the ground, and decay (disappear). Seeds can also fall and grow into new trees if there is enough space. <br>
+[Tree gen](https://github.com/friggog/tree-gen/tree/master) [Model of Plants](http://www.td-grafik.de/artic/talk20030122/overview.html) <br>
 Around Jun 2024, I thought: There could be a line of active voxel in the center of branches. The center voxels could have a timer and when it resets, they spawn a new ring of branch voxels that is 1 unit wider.
 
 Grass gets taller. It could spawn a new voxel above when its timer resets. It spawns grass seeds which grow into new grasses.
@@ -101,4 +102,4 @@ What if it used AI to automatically optimize? Jun 5, 2025: When optimizing parti
 
 I tried to make a voxel game a few times since Mar 2024. I started making [Leafbuild](https://thingmaker.us.eu.org/lfbd/prealpha-0.1.0.html) on Mar 17, 2024, and spent 5 months, almost entire day every day. It was too hard to make engine related things like data structures have good performance and low memory usage. I also don't really want to make things that will be gone eventually. But I still think that it is a awesome idea.
 
-Maybe someone else can make the voxel engine.
+Maybe someone else can create the voxel engine. But it would be nice if I can make terrain and more.
