@@ -15,11 +15,13 @@ In MC, it is sometimes annoying that the blocks are big, and you can't make some
 
 ## What I want the game to be like
 
-<a href="https://www.youtube.com/watch?v=1wufuXY3l1o"><img src="https://i.ytimg.com/vi/1wufuXY3l1o/hq720.jpg" style="filter:brightness(1.25)" loading="lazy"><img src="https://pbs.twimg.com/media/EwSl3TWVkAYDx1M?format=jpg&name=large" style="filter:brightness(1.25)" loading="lazy"></a>
+<a href="https://www.youtube.com/watch?v=1wufuXY3l1o"><img src="https://i.ytimg.com/vi/1wufuXY3l1o/hq720.jpg" style="filter:brightness(1.25)" loading="lazy"><img src="https://pbs.twimg.com/media/EwSl3TWVkAYDx1M?format=jpg&name=large" style="filter:brightness(1.25)" loading="lazy"><img src="https://pbs.twimg.com/ext_tw_video_thumb/1208998780164460544/pu/img/eGXwYbGqaQxwQ194.jpg" style="filter:brightness(1.75)" loading="lazy"></a>
 
 <a href="https://forum.luanti.org/viewtopic.php?t=25683"><img src="https://user-images.githubusercontent.com/6905002/99192695-79e9ff00-2774-11eb-9b78-3a4bc4c78217.png" style="filter:brightness(1.5)" loading="lazy"><img src="https://forum.luanti.org/download/file.php?mode=view&id=24732" style="filter:brightness(1.5)" loading="lazy"></a>
 
 <a href="https://www.youtube.com/watch?v=Hc3sb6lx0ag"><img src="https://i.ytimg.com/vi/Hc3sb6lx0ag/hq720.jpg" loading="lazy"></a>
+
+<img src="https://github.com/weigert/SimpleHydrology/blob/master/screenshots/side5.png?raw=true" loading="lazy">
 
 <img src="https://digital4planet.org/wp-content/uploads/sites/83/2021/05/old-growth-forest-with-rotting-tree-trunk-covered-3Y39CX3-1.jpg" style="filter:brightness(1.25)" loading="lazy"><img src="https://assets.simpleviewinc.com/simpleview/image/upload//v1/clients/roanoke/SV11033107V_431_e585f91b-359b-44f4-93b9-70b310b7b3dc.jpg" loading="lazy">
 
@@ -64,6 +66,10 @@ Around Jun 2024, I thought: There could be a line of active voxel in the center 
 
 Grass gets taller. It could spawn a new voxel above when its timer resets. It spawns grass seeds which grow into new grasses.
 
+Leaves and grass and small branches can sway in the wind. I want them to actually move, not just be a visual effect. They don't have to be constantly moving, they can sway occasionally when there is wind. The small branches may have to bend to move.
+
+Around Apr 2024: I thought about how to move the air when a voxel moves in leafbuild. It could store the location where the voxel moved away from, and when the voxel moved into air, it could move the air to the stored location.
+
 The player is also made of voxels. They interact with the world physically. To move, the player's velocity could be increased. They can hold and pick up things. When the player falls or gets hit, the part that got damaged loses health points. Parts: head, arm, leg, etc.
 
 There could be a picture of the player in the top left. If a part was hit, it flashes red. (like in Minecraft but more detailed) If a part is seperated or gone, it is transparent.
@@ -76,27 +82,32 @@ It will have multiplayer, so there will be other players. But how will the physi
 
 The graphics could be ray traced. Each voxel has a color and smoothness and normal (direction of the surface). The rays go straight but bounce off voxels. A way to make it less noisy is to store the average light recieved in each voxel. When the ray hits a voxel, it could use the voxel's average light value.
 
+Some people think that the single colored voxels make it hard to see. They probably don't see the voxels as little cubes. To fix this, the voxels could be smoothed instead (using marching cubes or similar).
+
 The worlds can be infinite, or round. For round worlds, there is a planet, which is a big ball made of voxels. The voxels shouldn't be stretched or distorted, just a voxel ball. There could even be a round sun made of voxels, that the planet orbits. It would have gravity, and each voxel has mass. This is very complicated, so probably don't make it.
 
 ## Technical details
 
-It should be moddable and the mods can add new types of materials and behaviors. It can also have multiple formats for storing voxels. [The perfect voxel engine](https://voxely.net/blog/the-perfect-voxel-engine/)
+It should be moddable and the mods can add new types of materials and behaviors. It can also have multiple formats for storing voxels. [The perfect voxel engine](https://voxely.net/blog/the-perfect-voxel-engine/) , [Graph of Voxely engine](https://pbs.twimg.com/media/E3KMlbhVgAEacOX?format=jpg)
 
 For solid objects, all the voxels in a solid object could be stored in a voxel grid.
 
 One way to simulate breaking: When it is breaking, the voxels next to the crack become seperate from the solid object. When the pieces are not connected anymore they also become seperate solid objects. The problem with this is that it doesn't actually bend. And how does it determine where it should be cracking?
 
-Mar 10 2025, from [my post](https://thingmaker.us.eu.org/post/?id=m7cllbb5bc9f): Voxels have attributes like color and material type, which should be changeable. To store them, there can be a octree for each attribute.
+[Mar 10 2025](https://thingmaker.us.eu.org/post/?id=m7cllbb5bc9f): Voxels have attributes like color and material type, which should be changeable. To store them, there can be a octree for each attribute.
 
 to add: example image of attributes
 
 It can be done on a gpu which is faster. GPUs can run code in parallel (thousands of times at the same time). It would be very hard to make this voxel game run on a gpu.
 
-Mar 10 2025, from [my post](https://thingmaker.us.eu.org/post/?id=m7cllbb5bc9f): Problem: how can a world be simulated if not everything is loaded? If everything is loaded, there may not be enough memory.
+[Mar 10 2025](https://thingmaker.us.eu.org/post/?id=m7cllbb5bc9f): Problem: how can a world be simulated if not everything is loaded? If everything is loaded, there may not be enough memory.
 
 When things like water are not moving or moving slowly, smaller water particles can be combined into bigger water particles to save memory and computation. When many solid objects are close together and not moving, they can also be combined into one grid to save memory and computation.
 
 What if it used AI to automatically optimize? Jun 5, 2025: When optimizing particles into voxels, the loss could be the similarity of the position and velocity
+
+### Smooth and detailed idea
+The terrain and things could be represented as polygons. If it used polygons, the terrain will be smoother and can have unlimited detail. Leaves and grass will be actually flat. But how will it represent terrain with many different types of materials mixed together? Voxels can also be very small, if using recursive formats like octrees.
 
 # End
 
