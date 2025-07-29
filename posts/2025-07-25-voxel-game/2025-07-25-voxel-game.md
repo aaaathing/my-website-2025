@@ -41,6 +41,7 @@ The player was in a desert filled with sand. He walked and looked for water. Aft
 
 The voxels are small. 1/16 meter is good. The voxels are also particles, and can move around.
 
+#### Types of materials
 There are many types of materials like: Grass, Soil, Stone (Limestone, Sandstone, Granite, Basalt, Slate, ...), Wood (Oak Wood, Birch Wood, ...), Leaf (Oak Leaf, Maple Leaf, ...), Fern, Flower, Water, Oil, Salt, Coal, Iron, Diamond <br>
 See [Sandboxels](https://sandboxels.r74n.com) for more types of materials (elements).
 
@@ -53,6 +54,12 @@ They can also be mixed together. For example, a voxel with `{soil:1, water:1}` i
 * Solids: Wood planks, tree branches, the ground made of stone, rocks, sticks, etc. They are rigid most of the time, but can break and fracture when bent or hit.
 
 When wood is broken enough, it can turn into wood dust. So can stone.
+
+To simulate fluids like water, it can use fluid simulation methods like MLS-MPM or SPH. It would be better if it conserved energy, so that two waves going against each other don't get smoothed out.
+
+Granular things like sand should be simulated consistently with the same methods as fluids.
+
+#### Simulated things
 
 It can erode the terrain in real time. Water picks up sediments like dirt and stone and sand. When the water moves down the hill, it moves the sediment down too. This can make rivers that go into bigger rivers and jagged mountain peaks. (Maybe the water can move them up, so it won't keep getting flatter.)
 
@@ -70,19 +77,29 @@ Leaves and grass and small branches can sway in the wind. I want them to actuall
 
 Around Apr 2024: I thought about how to move the air when a voxel moves in leafbuild. It could store the location where the voxel moved away from, and when the voxel moved into air, it could move the air to the stored location.
 
+#### Player
+
 The player is also made of voxels. They interact with the world physically. To move, the player's velocity could be increased. They can hold and pick up things. When the player falls or gets hit, the part that got damaged loses health points. Parts: head, arm, leg, etc.
 
 There could be a picture of the player in the top left. If a part was hit, it flashes red. (like in Minecraft but more detailed) If a part is seperated or gone, it is transparent.
 
+#### Terrain
 How it can generate terrain: It generates a base noise map. It can use perlin noise or simplex noise. Another kind of noise is a kind of voronoi noise but each cell has a random height and it interpolates (smoothes) it. ![](https://iquilezles.org/articles/voronoise/gfx01.jpg) Another kind of noise is white noise that is low frequency filtered. After generating noise, it can do erosion simulation on the noise map. [Erosion](https://nickmcd.me/2022/04/15/soilmachine/) [Rivers](https://forum.luanti.org/viewtopic.php?t=25683)
 
 Every tree can have their own biome definition. This way, there won't be sudden changes in biomes. [Map gen](https://forum.luanti.org/viewtopic.php?t=11430)
 
-It will have multiplayer, so there will be other players. But how will the physics be done? It is better to run physics on the server, because it will be simpler. This may have a delay when players try to move. Running physics on client side would be smoother and have less delay, but it would need more code and the server would need to check if it moves correctly and synchronize.
+#### Textures
+Jul 4, 2024: I thought about how to add textures to voxels. There was the chunk of sloped gray stone ground and columns of green grass. There could be colors for only the surface voxels. If a voxel gets uncovered and becomes a surface voxel, a color could be generated for it using noise.
 
-The graphics could be ray traced. Each voxel has a color and smoothness and normal (direction of the surface). The rays go straight but bounce off voxels. A way to make it less noisy is to store the average light recieved in each voxel. When the ray hits a voxel, it could use the voxel's average light value.
+#### Ray tracing
+The graphics could be ray traced. Each voxel has a color and smoothness and normal (direction of the surface). The rays go straight but bounce off voxels. Each ray's color starts as white. When it hits a voxel, multiply the ray's color by the voxel's color. When the ray goes through colored transparent voxels, also multiply by the voxel's color. For water, the bubbles look white by reflecting some light in a random direction.
+
+A way to make it less noisy is to store the average light recieved in each voxel. When the ray hits a voxel, it could use the voxel's average light value.
 
 Some people think that the single colored voxels make it hard to see. They probably don't see the voxels as little cubes. To fix this, the voxels could be smoothed instead (using marching cubes or similar).
+
+#### Multiplayer
+It will have multiplayer, so there will be other players. But how will the physics be done? It is better to run physics on the server, because it will be simpler. This may have a delay when players try to move. Running physics on client side would be smoother and have less delay, but it would need more code and the server would need to check if it moves correctly and synchronize.
 
 The worlds can be infinite, or round. For round worlds, there is a planet, which is a big ball made of voxels. The voxels shouldn't be stretched or distorted, just a voxel ball. There could even be a round sun made of voxels, that the planet orbits. It would have gravity, and each voxel has mass. This is very complicated, so probably don't make it.
 
@@ -92,21 +109,25 @@ It should be moddable and the mods can add new types of materials and behaviors.
 
 For solid objects, all the voxels in a solid object could be stored in a voxel grid.
 
+#### Solid object breaking
 One way to simulate breaking: When it is breaking, the voxels next to the crack become seperate from the solid object. When the pieces are not connected anymore they also become seperate solid objects. The problem with this is that it doesn't actually bend. And how does it determine where it should be cracking?
 
+#### Attributes
 [Mar 10 2025](https://thingmaker.us.eu.org/post/?id=m7cllbb5bc9f): Voxels have attributes like color and material type, which should be changeable. To store them, there can be a octree for each attribute.
-
-to add: example image of attributes
 
 It can be done on a gpu which is faster. GPUs can run code in parallel (thousands of times at the same time). It would be very hard to make this voxel game run on a gpu.
 
 [Mar 10 2025](https://thingmaker.us.eu.org/post/?id=m7cllbb5bc9f): Problem: how can a world be simulated if not everything is loaded? If everything is loaded, there may not be enough memory.
 
-When things like water are not moving or moving slowly, smaller water particles can be combined into bigger water particles to save memory and computation. When many solid objects are close together and not moving, they can also be combined into one grid to save memory and computation.
+#### Optimizing
+
+When things like water are not moving or moving slowly, smaller water particles can be combined into bigger water particles to save memory and computation. When many solid objects are close together and not moving, they can also be combined into one grid to save memory and computation. (in 3d, 8 particles combine into 1 particle twice the width)
 
 What if it used AI to automatically optimize? Jun 5, 2025: When optimizing particles into voxels, the loss could be the similarity of the position and velocity
 
-### Smooth and detailed idea
+It could use a convolutional NN or graph NN to decide whether to compress an area or not. This way, it could focus the computation on interesting areas, like a water splash or a crashing rock.
+
+#### Smooth and detailed idea
 The terrain and things could be represented as polygons. If it used polygons, the terrain will be smoother and can have unlimited detail. Leaves and grass will be actually flat. But how will it represent terrain with many different types of materials mixed together? Voxels can also be very small, if using recursive formats like octrees.
 
 # End
