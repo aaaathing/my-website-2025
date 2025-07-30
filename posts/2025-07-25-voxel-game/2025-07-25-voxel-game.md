@@ -15,6 +15,8 @@ In MC, it is sometimes annoying that the blocks are big, and you can't make some
 
 ## What I want the game to be like
 
+<img src="2025-07-29 16.46 Voxel Forest Shelter.png" style="filter:brightness(1.25)">
+
 <a href="https://www.youtube.com/watch?v=1wufuXY3l1o"><img src="https://i.ytimg.com/vi/1wufuXY3l1o/hq720.jpg" style="filter:brightness(1.25)" loading="lazy"><img src="https://pbs.twimg.com/media/EwSl3TWVkAYDx1M?format=jpg&name=large" style="filter:brightness(1.25)" loading="lazy"><img src="https://pbs.twimg.com/ext_tw_video_thumb/1208998780164460544/pu/img/eGXwYbGqaQxwQ194.jpg" style="filter:brightness(1.75)" loading="lazy"></a>
 
 <a href="https://forum.luanti.org/viewtopic.php?t=25683"><img src="https://user-images.githubusercontent.com/6905002/99192695-79e9ff00-2774-11eb-9b78-3a4bc4c78217.png" style="filter:brightness(1.5)" loading="lazy"><img src="https://forum.luanti.org/download/file.php?mode=view&id=24732" style="filter:brightness(1.5)" loading="lazy"></a>
@@ -42,12 +44,20 @@ The player was in a desert filled with sand. He walked and looked for water. Aft
 The voxels are small. 1/16 meter is good. The voxels are also particles, and can move around.
 
 #### Types of materials
-There are many types of materials like: Grass, Soil, Stone (Limestone, Sandstone, Granite, Basalt, Slate, ...), Wood (Oak Wood, Birch Wood, ...), Leaf (Oak Leaf, Maple Leaf, ...), Fern, Flower, Water, Oil, Salt, Coal, Iron, Diamond <br>
+There are many types of materials like:
+* Soil
+* [Stone](https://en.wikipedia.org/wiki/List_of_rock_types) (Limestone, Sandstone, Mudstone, Granite, Basalt, Marble (calcite), Slate, Shale, Andesite, Diorite, Obsidian, Quartz, Tuff, Chalk, Claystone, Coal, Flint, Ironstone, Schist, Gneiss, Soapstone, Lapis lazuli, Quartzite, ...)
+* Grass (Barley, Maize, Oats, Rice, Rye, Wheat, Millet,    Bamboo, Sugarcane, Reeds, Meadow-Grass,    Bluegrass, Bentgrass, Carpet grass)
+* Wood, Leaf, [Tree](https://treespnw.forestry.oregonstate.edu/name_common.html) (Oak, Birch, Maple, Spruce, Pine, Fir, Beech, Ash, Aspen, Poplar, Cypress, Sequoia, Elm, Redwood, Sycamore, Willow, ...)
+* Fern, Flower, Moss, Pumpkin, Melon
+* Water, Oil
+* Salt
+* Iron, Gold, Diamond, Copper
 See [Sandboxels](https://sandboxels.r74n.com) for more types of materials (elements).
 
 They can also be mixed together. For example, a voxel with `{soil:1, water:1}` is mud. `{wood:1, oak:1}` is oak wood. `{soil:1, clay:1}`is clay soil. `{water:1, salt:1}` is salt water.
 
-![](ground-water-sand-rock.png)
+<img src="2025-07-29 17.16 River with Boulders.png" style="filter:brightness(1.125)">
 
 * Water, oil, lava, etc. They flow and splash.
 * Sand, soil, wood dust, etc. They can pile up and slide.
