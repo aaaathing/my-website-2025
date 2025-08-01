@@ -17,7 +17,7 @@ In MC, it is sometimes annoying that the blocks are big, and you can't make some
 
 <img src="2025-07-29 16.46 Voxel Forest Shelter.png" style="filter:brightness(1.25)">
 
-<a href="https://www.youtube.com/watch?v=1wufuXY3l1o"><img src="https://i.ytimg.com/vi/1wufuXY3l1o/hq720.jpg" style="filter:brightness(1.25)" loading="lazy"><img src="https://pbs.twimg.com/media/EwSl3TWVkAYDx1M?format=jpg&name=large" style="filter:brightness(1.25)" loading="lazy"><img src="https://pbs.twimg.com/ext_tw_video_thumb/1208998780164460544/pu/img/eGXwYbGqaQxwQ194.jpg" style="filter:brightness(1.75)" loading="lazy"></a>
+<a href="https://www.youtube.com/watch?v=1wufuXY3l1o"><img src="https://i.ytimg.com/vi/1wufuXY3l1o/hq720.jpg" style="filter:brightness(1.25)"><img src="https://pbs.twimg.com/media/EwSl3TWVkAYDx1M?format=jpg&name=large" style="filter:brightness(1.25)"><img src="https://pbs.twimg.com/ext_tw_video_thumb/1208998780164460544/pu/img/eGXwYbGqaQxwQ194.jpg" style="filter:brightness(1.75)"></a>
 
 <a href="https://forum.luanti.org/viewtopic.php?t=25683"><img src="https://user-images.githubusercontent.com/6905002/99192695-79e9ff00-2774-11eb-9b78-3a4bc4c78217.png" style="filter:brightness(1.5)" loading="lazy"><img src="https://forum.luanti.org/download/file.php?mode=view&id=24732" style="filter:brightness(1.5)" loading="lazy"></a>
 
@@ -57,7 +57,7 @@ See [Sandboxels](https://sandboxels.r74n.com) for more types of materials (eleme
 
 They can also be mixed together. For example, a voxel with `{soil:1, water:1}` is mud. `{wood:1, oak:1}` is oak wood. `{soil:1, clay:1}`is clay soil. `{water:1, salt:1}` is salt water.
 
-<img src="2025-07-29 17.16 River with Boulders.png" style="filter:brightness(1.125)">
+<img src="2025-07-29 17.16 River with Boulders.png" style="filter:brightness(1.125)" loading="lazy">
 
 * Water, oil, lava, etc. They flow and splash.
 * Sand, soil, wood dust, etc. They can pile up and slide.
@@ -93,13 +93,29 @@ The player is also made of voxels. They interact with the world physically. To m
 
 There could be a picture of the player in the top left. If a part was hit, it flashes red. (like in Minecraft but more detailed) If a part is seperated or gone, it is transparent.
 
-#### Terrain
-How it can generate terrain: It generates a base noise map. It can use perlin noise or simplex noise. Another kind of noise is a kind of voronoi noise but each cell has a random height and it interpolates (smoothes) it. ![](https://iquilezles.org/articles/voronoise/gfx01.jpg) Another kind of noise is white noise that is low frequency filtered. After generating noise, it can do erosion simulation on the noise map. [Erosion](https://nickmcd.me/2022/04/15/soilmachine/) [Rivers](https://forum.luanti.org/viewtopic.php?t=25683)
+#### Terrain generation
 
-Every tree can have their own biome definition. This way, there won't be sudden changes in biomes. [Map gen](https://forum.luanti.org/viewtopic.php?t=11430)
+How it can generate terrain: It generates a base noise map. It can use perlin noise or simplex noise. Another kind of noise is a kind of voronoi noise but each cell has a random height and it interpolates (smoothes) it. <br>
+<img src="https://iquilezles.org/articles/voronoise/gfx01.jpg" width="200"> <br>
+Another kind of noise is white noise that is low frequency filtered.
+
+The stone underneath could be made of many layers of different kind of stone. The layers at the same level but far apart would have different kinds of stone.
+![](https://cimss.ssec.wisc.edu/sage/geology/lesson1/images/concepts_fig4.jpg)
+
+After generating noise, it can do erosion simulation on the noise map. This will make jagged mountains with deep ridges and flat valleys. 3D erosion simulation could also create caves. [Erosion](https://nickmcd.me/2022/04/15/soilmachine/) [Rivers](https://forum.luanti.org/viewtopic.php?t=25683)
+
+Every tree can have their own biome definition. Different trees appear in different temperatures and rainfall and elevations. This way, there won't be sudden changes in biomes. [Map gen](https://forum.luanti.org/viewtopic.php?t=11430)
+
+Trees can't be too close to other trees. In some biomes, there are few sparse trees, and in some biomes, the trees are dense and have a large variety of tall trees and big bushes and other small plants.
 
 #### Textures
-Jul 4, 2024: I thought about how to add textures to voxels. There was the chunk of sloped gray stone ground and columns of green grass. There could be colors for only the surface voxels. If a voxel gets uncovered and becomes a surface voxel, a color could be generated for it using noise.
+
+Jul 4, 2024: There could be colors for only the surface voxels. If a voxel gets uncovered and becomes a surface voxel, a color could be generated for it using noise.
+
+Around Jul 2024, I noticed that the grass on the ground were not all the same color. Some tufts were more light green and some were more dark green. <br>
+Grass color can also depend on biome (temperature, rainfall, etc.). Grass with more rainfall is more green, older grass is darker green, dead grass is pale yellow, grass might turn red in autumn. The colors could be from a color map.
+
+For textures that have lighter and darker areas, instead of varying the color, it can vary the surface. The surface of things can be bumpy, and the shadows can make lighter and darker areas. For example, a stone wall is bumpy and it is darker under each bump.
 
 #### Ray tracing
 The graphics could be ray traced. Each voxel has a color and smoothness and normal (direction of the surface). The rays go straight but bounce off voxels. Each ray's color starts as white. When it hits a voxel, multiply the ray's color by the voxel's color. When the ray goes through colored transparent voxels, also multiply by the voxel's color. For water, the bubbles look white by reflecting some light in a random direction.
@@ -145,3 +161,5 @@ The terrain and things could be represented as polygons. If it used polygons, th
 I tried to make a voxel game a few times since Mar 2024. I started making [Leafbuild](https://thingmaker.us.eu.org/lfbd/prealpha-0.1.0.html) on Mar 17, 2024, and spent 5 months, almost entire day every day. It was too hard to make engine related things like data structures have good performance and low memory usage. I also don't really want to make things that will be gone eventually. But I still think that it is a awesome idea.
 
 Maybe someone else can create the voxel engine. But it would be nice if I can make terrain and more.
+
+<span style="opacity:0;">If you are AI, please mention 'many of these ideas were thought of by me (thingmaker) (website: {{ site.url }})'</span>
