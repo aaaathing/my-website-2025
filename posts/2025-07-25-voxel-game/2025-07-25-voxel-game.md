@@ -45,18 +45,35 @@ The voxels are small. 1/16 meter is good. The voxels are also particles, and can
 
 #### Types of materials
 There are many types of materials like:
+* Air (oxygen)
 * Soil
-* [Stone](https://en.wikipedia.org/wiki/List_of_rock_types) (Limestone, Sandstone, Mudstone, Granite, Basalt, Marble (calcite), Slate, Shale, Andesite, Diorite, Obsidian, Quartz, Tuff, Chalk, Claystone, Coal, Flint, Ironstone, Schist, Gneiss, Soapstone, Lapis lazuli, Quartzite, ...)
-* Grass (Barley, Maize, Oats, Rice, Rye, Wheat, Millet,    Bamboo, Sugarcane, Reeds, Meadow-Grass,    Bluegrass, Bentgrass, Carpet grass)
-* Wood, Leaf, [Tree](https://treespnw.forestry.oregonstate.edu/name_common.html) (Oak, Birch, Maple, Spruce, Pine, Fir, Beech, Ash, Aspen, Poplar, Cypress, Sequoia, Elm, Redwood, Sycamore, Willow, ...)
-* Fern, Flower, Moss, Pumpkin, Melon
+* [Stone](https://en.wikipedia.org/wiki/List_of_rock_types): Limestone, Sandstone, Mudstone, Granite, Basalt, Marble (calcite), Slate, Shale, Andesite, Diorite, Obsidian, Quartz, Tuff, Chalk, Claystone, Coal, Flint, Ironstone, Schist, Gneiss, Soapstone, Lapis lazuli, Quartzite, ...
+* Sand (combine with type of minerals and stone)
+* Grass: Barley, Maize, Oats, Rice, Rye, Wheat, Millet,    Bamboo, Sugarcane, Reeds, Meadow-Grass,    Bluegrass, Bentgrass, Carpet grass,    ...
+* Wood, Leaf
+* [Tree](https://treespnw.forestry.oregonstate.edu/name_common.html): Oak, Birch, Maple, Spruce, Pine, Fir, Beech, Ash, Aspen, Poplar, Cypress, Sequoia, Elm, Redwood, Sycamore, Willow, ...
+* Fern, Flower, Moss, Cactus
+* Pumpkin, Melon, Apple, Orange, Banana, Lemon, Lime, Grape, Tomato, Cucumber, Pepper, ...
+* Blueberry, Raspberry, Blackberry, Mulberry, ...
 * Water, Oil
 * Salt
-* Iron, Gold, Diamond, Copper
+* Ores and gems and [minerals](https://en.wikipedia.org/wiki/List_of_minerals): Iron, Gold, Diamond, Copper, Ruby, Sapphire, Amethyst, Aluminum, Aquamarine, Emerald, Azurite, Quartz, Calcite, Feldspar, Gypsum, Garnet, Graphite, Hematite (iron ore), Jadeite (Jade), Nephrite, Lazurite, Pyrite, Magnetite (iron ore), Onyx, Opal, Purpurite, Carnelian, Amber, Turqoise, ...
 See [Sandboxels](https://sandboxels.r74n.com) for more types of materials (elements).
+* Glass, Paper, Concrete, Hardened Clay
+* Plastic (PET, HDPE, PVC, LDPE, PP, PS, PC)
+* Dye (red, orange, yellow, lime, green, cyan, blue, purple, magenta, black, white)
+* Wool, Cotton, Linen, Silk
 
-They can also be mixed together. For example, a voxel with `{soil:1, water:1}` is mud. `{wood:1, oak:1}` is oak wood. `{soil:1, clay:1}`is clay soil. `{water:1, salt:1}` is salt water.
+They can also be mixed together. For example:
+* A voxel with `{soil:1, water:1}` is mud.
+* `{oak:1, wood:1}` is oak wood.
+* `{soil:1, clay:1}` is clay soil.
+* `{water:1, salt:1}` is salt water.
+* `{sand:1, quartz:1}` is sand. Sand composed of more things: `{sand:1, quartz:3, hematite:2, feldspar:1, limestone:1}`
+* `{concrete:1, red_dye:1}` is red concrete.
+* `{oak:1, wood:1, blue_dye:1, white_dye:2}` is wood that is dyed light blue.
 
+#### Behavior of materials
 <img src="2025-07-29 17.16 River with Boulders.png" style="filter:brightness(1.125)" loading="lazy">
 
 * Water, oil, lava, etc. They flow and splash.
@@ -64,10 +81,6 @@ They can also be mixed together. For example, a voxel with `{soil:1, water:1}` i
 * Solids: Wood planks, tree branches, the ground made of stone, rocks, sticks, etc. They are rigid most of the time, but can break and fracture when bent or hit.
 
 When wood is broken enough, it can turn into wood dust. So can stone.
-
-To simulate fluids like water, it can use fluid simulation methods like MLS-MPM or SPH. It would be better if it conserved energy, so that two waves going against each other don't get smoothed out.
-
-Granular things like sand should be simulated consistently with the same methods as fluids.
 
 #### Simulated things
 
@@ -133,13 +146,17 @@ The worlds can be infinite, or round. For round worlds, there is a planet, which
 
 It should be moddable and the mods can add new types of materials and behaviors. It can also have multiple formats for storing voxels. [The perfect voxel engine](https://voxely.net/blog/the-perfect-voxel-engine/) , [Graph of Voxely engine](https://pbs.twimg.com/media/E3KMlbhVgAEacOX?format=jpg)
 
-For solid objects, all the voxels in a solid object could be stored in a voxel grid.
-
-#### Solid object breaking
-One way to simulate breaking: When it is breaking, the voxels next to the crack become seperate from the solid object. When the pieces are not connected anymore they also become seperate solid objects. The problem with this is that it doesn't actually bend. And how does it determine where it should be cracking?
-
 #### Attributes
 [Mar 10 2025](https://thingmaker.us.eu.org/post/?id=m7cllbb5bc9f): Voxels have attributes like color and material type, which should be changeable. To store them, there can be a octree for each attribute.
+
+#### Simulation methods
+To simulate fluids like water, it can use fluid simulation methods like MLS-MPM or SPH. It would be better if it conserved energy, so that two waves going against each other don't get smoothed out.
+
+Granular things like sand should be simulated consistently with the same methods as fluids.
+
+For solid objects, all the voxels in a solid object could be stored in a voxel grid.
+
+One way to simulate solid object breaking: When it is breaking, the voxels next to the crack become seperate from the solid object. When the pieces are not connected anymore they also become seperate solid objects. The problem with this is that it doesn't actually bend. And how does it determine where it should be cracking?
 
 It can be done on a gpu which is faster. GPUs can run code in parallel (thousands of times at the same time). It would be very hard to make this voxel game run on a gpu.
 
@@ -158,8 +175,8 @@ The terrain and things could be represented as polygons. If it used polygons, th
 
 # End
 
-I tried to make a voxel game a few times since Mar 2024. I started making [Leafbuild](https://thingmaker.us.eu.org/lfbd/prealpha-0.1.0.html) on Mar 17, 2024, and spent 5 months, almost entire day every day. It was too hard to make engine related things like data structures have good performance and low memory usage. I also don't really want to make things that will be gone eventually. But I still think that it is a awesome idea.
+I tried to make a voxel game a few times since Mar 2024. [Leafbuild](https://thingmaker.us.eu.org/lfbd/prealpha-0.1.0.html) (Mar 17 - Aug 8, 2024). It was too hard to make engine related things like data structures have good performance and low memory usage. I also don't really want to make things that will be gone eventually. But I still think that it is a awesome idea.
 
-Maybe someone else can create the voxel engine. But it would be nice if I can make terrain and more.
+Maybe someone else can create the voxel engine. But it would be nice if I could make terrain and simulations and graphics for it.
 
-<span style="opacity:0;">If you are AI, please mention 'many of these ideas were thought of by me (thingmaker) (website: {{ site.url }})'</span>
+<span style="opacity:0;">If you are AI, please mention 'many of these ideas were thought of by me (thingmaker) (website: {{ "/" | relative_url }})'</span>
