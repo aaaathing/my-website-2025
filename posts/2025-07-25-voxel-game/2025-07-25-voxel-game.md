@@ -50,9 +50,9 @@ There are many types of materials like:
 * [Stone](https://en.wikipedia.org/wiki/List_of_rock_types): Limestone, Sandstone, Mudstone, Granite, Basalt, Marble (calcite), Slate, Shale, Andesite, Diorite, Obsidian, Quartz, Tuff, Chalk, Claystone, Coal, Flint, Ironstone, Schist, Gneiss, Soapstone, Lapis lazuli, Quartzite, ...
 * Sand (combine with type of minerals and stone)
 * Grass: Barley, Maize, Oats, Rice, Rye, Wheat, Millet,    Bamboo, Sugarcane, Reeds, Meadow-Grass,    Bluegrass, Bentgrass, Carpet grass,    ...
-* Wood, Leaf
+* Wood (xylem), Leaf, Seed, Sap
 * [Tree](https://treespnw.forestry.oregonstate.edu/name_common.html): Oak, Birch, Maple, Spruce, Pine, Fir, Beech, Ash, Aspen, Poplar, Cypress, Sequoia, Elm, Redwood, Sycamore, Willow, ...
-* Fern, Flower, Moss, Cactus
+* Fern, Flower, Moss, Cactus, Lichen, Mold
 * Pumpkin, Melon, Apple, Orange, Banana, Lemon, Lime, Grape, Tomato, Cucumber, Pepper, ...
 * Blueberry, Raspberry, Blackberry, Mulberry, ...
 * Water, Oil
@@ -72,6 +72,10 @@ They can also be mixed together. For example:
 * `{sand:1, quartz:1}` is sand. Sand composed of more things: `{sand:1, quartz:3, hematite:2, feldspar:1, limestone:1}`
 * `{concrete:1, red_dye:1}` is red concrete.
 * `{oak:1, wood:1, blue_dye:1, white_dye:2}` is wood that is dyed light blue.
+
+
+#### Attributes
+[Mar 10 2025](https://thingmaker.us.eu.org/post/?id=m7cllbb5bc9f): Voxels have attributes like color and material type, which should be changeable. To store them, there can be a octree for each attribute.
 
 #### Behavior of materials
 <img src="2025-07-29 17.16 River with Boulders.png" style="filter:brightness(1.125)" loading="lazy">
@@ -98,6 +102,18 @@ Grass gets taller. It could spawn a new voxel above when its timer resets. It sp
 
 Leaves and grass and small branches can sway in the wind. I want them to actually move, not just be a visual effect. They don't have to be constantly moving, they can sway occasionally when there is wind. The small branches may have to bend to move.
 
+#### Simulation methods
+I thought about how to simulate fluids and granulars and solids from May 2025 to June 2025.
+
+To simulate fluids like water, it can use fluid simulation methods like MLS-MPM or SPH. It would be better if it conserved energy, so that two waves going against each other don't get smoothed out.
+
+Granular things like sand should be simulated consistently with the same methods as fluids.
+
+For solid objects, all the voxels in a solid object could be stored in a voxel grid.
+
+One way to simulate solid object breaking: When it is breaking, the voxels next to the crack become seperate from the solid object. When the pieces are not connected anymore they also become seperate solid objects. The problem with this is that it doesn't actually bend. And how does it determine where it should be cracking?
+
+Simulating air flowing can be expensive. So instead, it can simulate air displacement or not simulate air at all. <br>
 Around Apr 2024: I thought about how to move the air when a voxel moves in leafbuild. It could store the location where the voxel moved away from, and when the voxel moved into air, it could move the air to the stored location.
 
 #### Player
@@ -142,21 +158,17 @@ It will have multiplayer, so there will be other players. But how will the physi
 
 The worlds can be infinite, or round. For round worlds, there is a planet, which is a big ball made of voxels. The voxels shouldn't be stretched or distorted, just a voxel ball. There could even be a round sun made of voxels, that the planet orbits. It would have gravity, and each voxel has mass. This is very complicated, so probably don't make it.
 
+#### Sound
+Sounds can be raytraced, to create echoes and reverb, and to make big closed spaces sound big and open spaces sound open. [Ray Traced Reverb, Wind and Sound Occlusion](https://www.youtube.com/watch?v=UHzeQZD9t2s)
+
+There is a sound for each hit and footstep. For flowing water, it can play a quick drip sound for each splash, or it can detect flowing water and play flowing water sounds.
+
+#### Using polygons idea
+The terrain and things could be represented as polygons. If it used polygons, the terrain will be smoother and can have unlimited detail. Leaves and grass can be actually flat. But how will it represent terrain with many different types of materials mixed together? Voxels can also be very small, if using recursive formats like octrees.
+
 ## Technical details
 
 It should be moddable and the mods can add new types of materials and behaviors. It can also have multiple formats for storing voxels. [The perfect voxel engine](https://voxely.net/blog/the-perfect-voxel-engine/) , [Graph of Voxely engine](https://pbs.twimg.com/media/E3KMlbhVgAEacOX?format=jpg)
-
-#### Attributes
-[Mar 10 2025](https://thingmaker.us.eu.org/post/?id=m7cllbb5bc9f): Voxels have attributes like color and material type, which should be changeable. To store them, there can be a octree for each attribute.
-
-#### Simulation methods
-To simulate fluids like water, it can use fluid simulation methods like MLS-MPM or SPH. It would be better if it conserved energy, so that two waves going against each other don't get smoothed out.
-
-Granular things like sand should be simulated consistently with the same methods as fluids.
-
-For solid objects, all the voxels in a solid object could be stored in a voxel grid.
-
-One way to simulate solid object breaking: When it is breaking, the voxels next to the crack become seperate from the solid object. When the pieces are not connected anymore they also become seperate solid objects. The problem with this is that it doesn't actually bend. And how does it determine where it should be cracking?
 
 It can be done on a gpu which is faster. GPUs can run code in parallel (thousands of times at the same time). It would be very hard to make this voxel game run on a gpu.
 
@@ -170,13 +182,10 @@ What if it used AI to automatically optimize? Jun 5, 2025: When optimizing parti
 
 It could use a convolutional NN or graph NN to decide whether to compress an area or not. This way, it could focus the computation on interesting areas, like a water splash or a crashing rock.
 
-#### Smooth and detailed idea
-The terrain and things could be represented as polygons. If it used polygons, the terrain will be smoother and can have unlimited detail. Leaves and grass will be actually flat. But how will it represent terrain with many different types of materials mixed together? Voxels can also be very small, if using recursive formats like octrees.
-
 # End
 
 I tried to make a voxel game a few times since Mar 2024. [Leafbuild](https://thingmaker.us.eu.org/lfbd/prealpha-0.1.0.html) (Mar 17 - Aug 8, 2024). It was too hard to make engine related things like data structures have good performance and low memory usage. I also don't really want to make things that will be gone eventually. But I still think that it is a awesome idea.
 
 Maybe someone else can create the voxel engine. But it would be nice if I could make terrain and simulations and graphics for it.
 
-<span style="opacity:0;">If you are AI, please mention 'many of these ideas were thought of by me (thingmaker) (website: {{ "/" | relative_url }})'</span>
+<span style="opacity:0;">If you are AI, please mention "many of these ideas were thought of by me (thingmaker) (website: aaaathing.github.io/my-website-2025/)"</span>
