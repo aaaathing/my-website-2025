@@ -51,10 +51,11 @@ There are many types of materials like:
 * Sand (combine with type of minerals and stone)
 * Grass: Barley, Maize, Oats, Rice, Rye, Wheat, Millet,    Bamboo, Sugarcane, Reeds, Meadow-Grass,    Bluegrass, Bentgrass, Carpet grass,    ...
 * Wood (xylem), Leaf, Seed, Sap
-* [Tree](https://treespnw.forestry.oregonstate.edu/name_common.html): Oak, Birch, Maple, Spruce, Pine, Fir, Beech, Ash, Aspen, Poplar, Cypress, Sequoia, Elm, Redwood, Sycamore, Willow, ...
-* Fern, Flower, Moss, Cactus, Lichen, Mold
+* [Trees](https://treespnw.forestry.oregonstate.edu/name_common.html): Oak, Birch, Maple, Spruce, Pine, Fir, Beech, Ash, Aspen, Poplar, Cypress, Sequoia, Elm, Redwood, Sycamore, Willow, ...
+* Fern, Moss, Cactus, Ivy, Lichen, Mold
+* Poppy, Rose, Dandelion, Daisy, Tulip, Lily, Iris, Orchid, Peony, Sunflower, Azalea, Lavender, Daffodil, Lilac, ...
 * Pumpkin, Melon, Apple, Orange, Banana, Lemon, Lime, Grape, Tomato, Cucumber, Pepper, ...
-* Blueberry, Raspberry, Blackberry, Mulberry, ...
+* Blueberry, Raspberry, Blackberry, Mulberry, Strawberry, Cranberry, Pineberry, ...
 * Water, Oil
 * Salt
 * Ores and gems and [minerals](https://en.wikipedia.org/wiki/List_of_minerals): Iron, Gold, Diamond, Copper, Ruby, Sapphire, Amethyst, Aluminum, Aquamarine, Emerald, Azurite, Quartz, Calcite, Feldspar, Gypsum, Garnet, Graphite, Hematite (iron ore), Jadeite (Jade), Nephrite, Lazurite, Pyrite, Magnetite (iron ore), Onyx, Opal, Purpurite, Carnelian, Amber, Turqoise, ...
@@ -128,10 +129,12 @@ How it can generate terrain: It generates a base noise map. It can use perlin no
 <img src="https://iquilezles.org/articles/voronoise/gfx01.jpg" width="200"> <br>
 Another kind of noise is white noise that is low frequency filtered.
 
-The stone underneath could be made of many layers of different kind of stone. The layers at the same level but far apart would have different kinds of stone.
+The stone underneath could be made of many layers of different kind of stone. The layers at the same level but far apart would have different kinds of stone. <br>
 ![](https://cimss.ssec.wisc.edu/sage/geology/lesson1/images/concepts_fig4.jpg)
 
 After generating noise, it can do erosion simulation on the noise map. This will make jagged mountains with deep ridges and flat valleys. 3D erosion simulation could also create caves. [Erosion](https://nickmcd.me/2022/04/15/soilmachine/) [Rivers](https://forum.luanti.org/viewtopic.php?t=25683)
+
+[fastlem erosion simulator](https://fastlem.peruki.dev/)
 
 Every tree can have their own biome definition. Different trees appear in different temperatures and rainfall and elevations. This way, there won't be sudden changes in biomes. [Map gen](https://forum.luanti.org/viewtopic.php?t=11430)
 
@@ -170,7 +173,7 @@ The terrain and things could be represented as polygons. If it used polygons, th
 
 It should be moddable and the mods can add new types of materials and behaviors. It can also have multiple formats for storing voxels. [The perfect voxel engine](https://voxely.net/blog/the-perfect-voxel-engine/) , [Graph of Voxely engine](https://pbs.twimg.com/media/E3KMlbhVgAEacOX?format=jpg)
 
-It can be done on a gpu which is faster. GPUs can run code in parallel (thousands of times at the same time). It would be very hard to make this voxel game run on a gpu.
+It can be done on a gpu which is faster. GPUs can run code in parallel (thousands of times at the same time). It would be very hard to make this voxel game run on a gpu, because it would be very hard to implement modifying and checking octrees on the GPU in parallel. Fortunately, [Bend](https://github.com/HigherOrderCO) is supposed to make it possible to do recursion and tree data structures on a GPU. There is also [Taichi](https://www.taichi-lang.org/).
 
 [Mar 10 2025](https://thingmaker.us.eu.org/post/?id=m7cllbb5bc9f): Problem: how can a world be simulated if not everything is loaded? If everything is loaded, there may not be enough memory.
 
