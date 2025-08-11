@@ -21,13 +21,24 @@ In MC, it is sometimes annoying that the blocks are big, and you can't make some
 
 <a href="https://forum.luanti.org/viewtopic.php?t=25683"><img src="https://user-images.githubusercontent.com/6905002/99192695-79e9ff00-2774-11eb-9b78-3a4bc4c78217.png" style="filter:brightness(1.5)" loading="lazy"><img src="https://forum.luanti.org/download/file.php?mode=view&id=24732" style="filter:brightness(1.5)" loading="lazy"></a>
 
+<details><summary>This one is kind of ugly but simulates tree growth</summary>
 <a href="https://www.youtube.com/watch?v=Hc3sb6lx0ag"><img src="https://i.ytimg.com/vi/Hc3sb6lx0ag/hq720.jpg" loading="lazy"></a>
+</details>
 
 <img src="https://github.com/weigert/SimpleHydrology/blob/master/screenshots/side5.png?raw=true" loading="lazy">
 
-<img src="https://digital4planet.org/wp-content/uploads/sites/83/2021/05/old-growth-forest-with-rotting-tree-trunk-covered-3Y39CX3-1.jpg" style="filter:brightness(1.25)" loading="lazy"><img src="https://assets.simpleviewinc.com/simpleview/image/upload//v1/clients/roanoke/SV11033107V_431_e585f91b-359b-44f4-93b9-70b310b7b3dc.jpg" loading="lazy">
-
-to add: more example images
+<img src="https://digital4planet.org/wp-content/uploads/sites/83/2021/05/old-growth-forest-with-rotting-tree-trunk-covered-3Y39CX3-1.jpg" style="filter:brightness(1.25)" loading="lazy">
+<img src="https://assets.simpleviewinc.com/simpleview/image/upload//v1/clients/roanoke/SV11033107V_431_e585f91b-359b-44f4-93b9-70b310b7b3dc.jpg" loading="lazy">
+<details><summary>more</summary>
+<img src="https://www.roadsidesecrets.com/wp-content/uploads/sanborn_county_park_campground.jpg" loading="lazy">
+<img src="https://supportparks.org/wp-content/uploads/2019/09/5AB5AFDE-4DC6-44AE-940B-967CEA2E5BA9-1024x767.jpg" loading="lazy">
+</details>
+<img src="https://www.hikingautism.com/uploads/7/3/2/0/7320989/4-p1160272_orig.jpeg" loading="lazy">
+<img src="https://mnfi.anr.msu.edu/element-images/1000/Cave-3859.jpg" loading="lazy">
+<img src="https://lh3.googleusercontent.com/IEvDqLVBQO8Ef8qMfTllNGDSwb-sTnZO7mHG6HrH-NfBGRopn4MEz1r6DU5Vih2nL3361-6pK2ukbWXBCVqJmAqN2DB0P-Xi5SwyLZnl7GYEV7EDANljDORJNnm-ACc6PoklHBhPqRE=w2661-h1995-no" loading="lazy">
+<details><summary>more</summary>
+<img src="https://cdn.britannica.com/29/125429-004-0F98C657/entrances-Alabama-Russell-Cave-National-Monument.jpg" loading="lazy">
+</details>
 
 
 Jun 27, 2025: I walked around and imagined what the voxel/simulation could be like: A mountain slope with a small wood hut and presence of tall trees in the distance, bird sounds, walking into the hut and wood stepping sounds. Going to the bottom of the valley, a river flowing from left to right and more dense trees on the other side, water flowing sounds, tall mountain on the other side with yellow sunlight and shadow cast by other mountains. Looking at a sloped valley going down side of hill in the shadow, some trees around, rain falling. Rain in a city, looking at the water flowing from tall building to gutter on the ground. I thought about how it could have complicatedely connected things, like water streams.

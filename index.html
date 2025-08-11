@@ -33,8 +33,16 @@ title: Home
       <h1>thingmaker's website 2025</h1>
       Since Jul 2025<br>
       <a href="https://thingmaker.us.eu.org">Old website</a><br>
-      Profiles: <a href="https://scratch.mit.edu/users/2-people">scratch</a> | <a href="https://replit.com/@thingMaker">replit</a> | <a href="https://github.com/aaaathing/">github</a><br>
+      Profiles: <a href="https://scratch.mit.edu/users/2-people">scratch</a> • <a href="https://replit.com/@thingMaker">replit</a> • <a href="https://github.com/aaaathing/">github</a> • <button onclick="sendMsg()">send message</button>
     </div>
+    <script>
+      function sendMsg(){
+        let msg = prompt("message")
+        if(!msg) return
+        let who = prompt("who are you")
+        fetch("https://script.google.com/macros/s/AKfycbxAEIeNzzrUBimqqgL3DC0bCz77kiyJC4h8-qcgiBP8s8JcJ-s1tvQAEFEGRp1MjlZeLw/exec",{method:"POST",body: "from my-website-2025, "+who+": "+msg}).then(r=>r.text()).then(alert).catch(alert)
+      }
+    </script>
     
     <div class="container-lg px-3 my-5 markdown-body">
 
