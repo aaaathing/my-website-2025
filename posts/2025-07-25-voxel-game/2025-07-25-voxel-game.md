@@ -13,13 +13,29 @@ The terrain will have tall mountains and valleys and long rivers. The forests ar
 
 In MC, it is sometimes annoying that the blocks are big, and you can't make something out of blocks that falls and slides down hills.
 
+[Skip to details](#details)
+
 ## What I want the game to be like
 
 <img src="2025-07-29 16.46 Voxel Forest Shelter.png" style="filter:brightness(1.25)">
 
+[John Lin's voxel engine](https://www.youtube.com/@johnlin9665) <br>
 <a href="https://www.youtube.com/watch?v=1wufuXY3l1o"><img src="https://i.ytimg.com/vi/1wufuXY3l1o/hq720.jpg" style="filter:brightness(1.25)"><img src="https://pbs.twimg.com/media/EwSl3TWVkAYDx1M?format=jpg&name=large" style="filter:brightness(1.25)"><img src="https://pbs.twimg.com/ext_tw_video_thumb/1208998780164460544/pu/img/eGXwYbGqaQxwQ194.jpg" style="filter:brightness(1.75)"></a>
 
 <a href="https://forum.luanti.org/viewtopic.php?t=25683"><img src="https://user-images.githubusercontent.com/6905002/99192695-79e9ff00-2774-11eb-9b78-3a4bc4c78217.png" style="filter:brightness(1.5)" loading="lazy"><img src="https://forum.luanti.org/download/file.php?mode=view&id=24732" style="filter:brightness(1.5)" loading="lazy"></a>
+
+[Grant Kot, fluid simulation game](https://www.youtube.com/@GrantKot)
+
+[Douglas, good voxel engine](https://www.youtube.com/@DouglasDwyer)
+
+[Rey](https://www.youtube.com/@_rey/playlists)
+<a href="https://www.youtube.com/watch?v=URL9osB2xx4&list=PLJfH32nv2u2odOTnB3uTUZ0cAHitOYFFU&index=1"><img src="https://i.ytimg.com/vi/URL9osB2xx4/hqdefault.jpg"><img src="https://i.ytimg.com/vi/KMhPsT0vA1w/hqdefault.jpg"></a>
+<a href="https://www.youtube.com/watch?v=T82aEvpwcLE&list=PLJfH32nv2u2rAx_38t7y-SL3LzKb6-PBR"><img src="https://i.ytimg.com/vi/T82aEvpwcLE/hqdefault.jpg"></a>
+
+[Gabe Rundlett, voxel engine on gpu](https://www.youtube.com/@GabeRundlett)
+<img src="https://i.ytimg.com/an_webp/NlXC8w_oqfU/mqdefault_6s.webp?&sqp=CK3Cp8UG&rs=AOn4CLAD4rV-dd4mJCS4gt9rSjXgglGbVQ" loading="lazy">
+
+[capslpop](https://www.youtube.com/@capslpop)
 
 <details><summary>This one is kind of ugly but simulates tree growth</summary>
 <a href="https://www.youtube.com/watch?v=Hc3sb6lx0ag"><img src="https://i.ytimg.com/vi/Hc3sb6lx0ag/hq720.jpg" loading="lazy"></a>
@@ -39,7 +55,6 @@ In MC, it is sometimes annoying that the blocks are big, and you can't make some
 <details><summary>more</summary>
 <img src="https://cdn.britannica.com/29/125429-004-0F98C657/entrances-Alabama-Russell-Cave-National-Monument.jpg" loading="lazy">
 </details>
-
 
 Jun 27, 2025: I walked around and imagined what the voxel/simulation could be like: A mountain slope with a small wood hut and presence of tall trees in the distance, bird sounds, walking into the hut and wood stepping sounds. Going to the bottom of the valley, a river flowing from left to right and more dense trees on the other side, water flowing sounds, tall mountain on the other side with yellow sunlight and shadow cast by other mountains. Looking at a sloped valley going down side of hill in the shadow, some trees around, rain falling. Rain in a city, looking at the water flowing from tall building to gutter on the ground. I thought about how it could have complicatedely connected things, like water streams.
 
@@ -107,7 +122,7 @@ Rivers can also flow in real time. The rivers flow from mountains and combine an
 Around Mar 2024: I thought about small voxels but in a new game. It could load chunks that had water flowing to already loaded chunks, to keep rivers flowing. While going downhill on the trail, I thought that further chunks could be simulated slower.
 
 Tree and plants could grow in real time too. The branches get thicker over time, and new branches grow longer and grow leaves and buds. (types: oak leaf, oak bud, oak wood, oak bud growing, etc.) In autumn, the leaves fall onto the ground, and decay (disappear). Seeds can also fall and grow into new trees if there is enough space. <br>
-[Tree gen](https://github.com/friggog/tree-gen/tree/master) [Model of Plants](http://www.td-grafik.de/artic/talk20030122/overview.html) <br>
+[Tree gen](https://github.com/friggog/tree-gen/tree/master) • [Model of Plants](http://www.td-grafik.de/artic/talk20030122/overview.html) • [Algorithmic Botany](https://algorithmicbotany.org/papers/) • [Algorithmic beauty of plants](https://algorithmicbotany.org/papers/#abop) <br>
 Around Jun 2024, I thought: There could be a line of active voxel in the center of branches. The center voxels could have a timer and when it resets, they spawn a new ring of branch voxels that is 1 unit wider.
 
 Grass gets taller. It could spawn a new voxel above when its timer resets. It spawns grass seeds which grow into new grasses.
@@ -143,9 +158,7 @@ Another kind of noise is white noise that is low frequency filtered.
 The stone underneath could be made of many layers of different kind of stone. The layers at the same level but far apart would have different kinds of stone. <br>
 ![](https://cimss.ssec.wisc.edu/sage/geology/lesson1/images/concepts_fig4.jpg)
 
-After generating noise, it can do erosion simulation on the noise map. This will make jagged mountains with deep ridges and flat valleys. 3D erosion simulation could also create caves. [Erosion](https://nickmcd.me/2022/04/15/soilmachine/) [Rivers](https://forum.luanti.org/viewtopic.php?t=25683)
-
-[fastlem erosion simulator](https://fastlem.peruki.dev/)
+After generating noise, it can do erosion simulation on the noise map. This will make jagged mountains with deep ridges and flat valleys. 3D erosion simulation could also create caves. [Erosion](https://nickmcd.me/2022/04/15/soilmachine/) • [Rivers](https://forum.luanti.org/viewtopic.php?t=25683) • [fastlem erosion simulator](https://fastlem.peruki.dev/)
 
 Every tree can have their own biome definition. Different trees appear in different temperatures and rainfall and elevations. This way, there won't be sudden changes in biomes. [Map gen](https://forum.luanti.org/viewtopic.php?t=11430)
 
@@ -182,7 +195,7 @@ The terrain and things could be represented as polygons. If it used polygons, th
 
 ## Technical details
 
-It should be moddable and the mods can add new types of materials and behaviors. It can also have multiple formats for storing voxels. [The perfect voxel engine](https://voxely.net/blog/the-perfect-voxel-engine/) , [Graph of Voxely engine](https://pbs.twimg.com/media/E3KMlbhVgAEacOX?format=jpg)
+It should be moddable and the mods can add new types of materials and behaviors. It can also have multiple formats for storing voxels. [The perfect voxel engine](https://voxely.net/blog/the-perfect-voxel-engine/) • [Graph of Voxely engine](https://pbs.twimg.com/media/E3KMlbhVgAEacOX?format=jpg)
 
 It can be done on a gpu which is faster. GPUs can run code in parallel (thousands of times at the same time). It would be very hard to make this voxel game run on a gpu, because it would be very hard to implement modifying and checking octrees on the GPU in parallel. Fortunately, [Bend](https://github.com/HigherOrderCO) is supposed to make it possible to do recursion and tree data structures on a GPU. There is also [Taichi](https://www.taichi-lang.org/).
 
@@ -198,7 +211,11 @@ It could use a convolutional NN or graph NN to decide whether to compress an are
 
 # End
 
-I tried to make a voxel game a few times since Mar 2024. [Leafbuild](https://thingmaker.us.eu.org/lfbd/prealpha-0.1.0.html) (Mar 17 - Aug 8, 2024). It was too hard to make engine related things like data structures have good performance and low memory usage. I also don't really want to make things that will be gone eventually. But I still think that it is a awesome idea.
+I tried to make a voxel game a few times since Mar 2024.  
+A few days before March 18, I discovered [John Lin's voxel engine](https://www.youtube.com/@johnlin9665).  
+Many days later, I started developing [Leafbuild](https://thingmaker.us.eu.org/lfbd/prealpha-0.1.0.html) ([source code](https://github.com/aaaathing/websitethingmaker/tree/main/public/lfbd)) (Mar 17 - Aug 8, 2024). But it was too hard to make engine related things like data structures have good performance and low memory usage.
+
+But it was such an awesome idea, and I sometimes still think about making it.
 
 Maybe someone else can create the voxel engine. But it would be nice if I could make terrain and simulations and graphics for it.
 

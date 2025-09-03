@@ -11,29 +11,26 @@ title: Home
     {% seo %}
     <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
   </head>
-  <body>
+  <body style="background-position: center; background-size: cover;">
+    <div class="container-lg markdown-body">
+      <a href="{{ '/' | relative_url }}"><h1 style="color:#ffbd61;">My website</h1></a>
+    </div>
     <style>
       /* Header/logo Title */
       .header {
         padding: 80px;
         text-align: center;
-        background: #ffbd61;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
+        background: #ffbd61aa;
         color: rgb(95, 73, 0);
       }
-
-      /* Increase the font size of the heading */
-      .header h1 {
-        font-size: 40px;
-      }
     </style>
-    <div class="markdown-body header">
-      <h1>thingmaker's website 2025</h1>
+    <div class="header">
+    <div class="container-lg px-3 markdown-body">
+      <h1 style="font-size: 40px;">thingmaker's website 2025</h1>
       Since Jul 2025<br>
       <a href="https://thingmaker.us.eu.org">Old website</a><br>
       Profiles: <a href="https://scratch.mit.edu/users/2-people">scratch</a> • <a href="https://replit.com/@thingMaker">replit</a> • <a href="https://github.com/aaaathing/">github</a> • <button onclick="sendMsg()">send message</button>
+    </div>
     </div>
     <script>
       function sendMsg(){
@@ -50,7 +47,7 @@ title: Home
         {% assign posts = site.pages | where: "layout", "post" | reverse %}
         {% for post in posts %}
           <a href="{{ post.url | relative_url }}">
-            <div style="margin-bottom:16px; padding:16px; border: 1px solid gray;">
+            <div style="margin-bottom:16px; padding:16px; border: 1px solid lightgray; background:#fffa;">
               {{ post.title }} <br>
               <span style="opacity:0.5">{{ post.date | date_to_string }}</span>
             </div>
@@ -58,5 +55,41 @@ title: Home
         {% endfor %}
       </div>
     </div>
+
+    <script>
+      let backgrounds = [
+["Sep 2, 2025","https://striresearch.si.edu/rainforest/wp-content/uploads/sites/17/2019/11/cloud-habitat-slideshow-2_3.jpg"],
+["Aug 25, 2025"/*added on Sep 2, 2025*/,"https://scx2.b-cdn.net/gfx/news/hires/2019/1-restorenatur.jpg"],
+["Aug 19, 2025","https://images.squarespace-cdn.com/content/v1/54f74f23e4b0952b4e0011c0/1473991024529-FDDN5AFFB2ILJ43JW7UD/ke17ZwdGBToddI8pDm48kKAwwdAfKsTlKsCcElEApLR7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UegTYNQkRo-Jk4EWsyBNhwKrKLo5CceA1-Tdpfgyxoog5ck0MD3_q0rY3jFJjjoLbQ/image-asset.jpeg"],
+["Aug 20, 2025"/*added on Sep 2, 2025*/,"https://images.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvNDc5NDY5MDYvNmY0ZWEyZDY4MmNlM2ZiZThhMTE1MmIxMzU2ZmE4NGYuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjoxMDgwLCJoZWlnaHQiOjcwMCwiZml0IjoiY292ZXIifSwicm90YXRlIjpudWxsLCJqcGVnIjp7InRyZWxsaXNRdWFudGlzYXRpb24iOnRydWUsIm92ZXJzaG9vdERlcmluZ2luZyI6dHJ1ZSwib3B0aW1pc2VTY2FucyI6dHJ1ZSwicXVhbnRpc2F0aW9uVGFibGUiOjN9fX0"],
+["Jun 21, 2025"/*added on Sep 2, 2025*/,"https://i.pinimg.com/1200x/99/d7/90/99d790708246cfaecf80a047b4931980.jpg"],
+["Jun 13, 2025"/*added on Sep 2, 2025*/,"https://sondoongcave.info/wp-content/uploads/2022/03/ho-troi.png"],
+["Jun 13, 2025"/*added on Sep 2, 2025*/,"https://cache.desktopnexus.com/thumbseg/35/35032-bigthumbnail.jpg"],
+["Jun 4, 2025"/*added on Sep 2, 2025*/,"https://cdn.sanity.io/images/oyzyxja8/v2/7f5713f69dee53f64ae5bf456cc3ec14787c26a2-1700x2000.jpg"],
+["May 12, 2025"/*copied from old website*/,"https://images.stockcake.com/public/e/f/4/ef4b86d8-f9f8-43af-ab0e-2baf15abc8cc_large/starry-forest-night-stockcake.jpg"],
+      ]
+
+      let chooseBgTimeout
+      function chooseBg(){
+        let selected, n = Math.random()
+        let chance = 1 // it mostly likely chooses the first one
+        for(let i=0; i<backgrounds.length; i++){
+          chance *= 0.25
+          if(n > chance){
+            selected = backgrounds.splice(i,1)[0]
+            break
+          }
+        }
+        if(selected){
+          backgrounds.push(selected) //add it to the back
+          document.body.style.backgroundImage = "url("+selected[1]+")"
+        }
+        clearTimeout(chooseBgTimeout)
+        chooseBgTimeout = setTimeout(chooseBg,1000*60)
+      }
+      chooseBg()
+      document.querySelector(".header").addEventListener("click",chooseBg)
+    </script>
+    
   </body>
 </html>
