@@ -11,8 +11,6 @@ I mostly wanted to make terrain generation and trees and foliage generation. I a
 
 The terrain will have tall mountains and valleys and long rivers. The forests are dense and there are many different kinds of forests with different kinds of trees. Different trees appear in different temperatures and rainfall and elevations. It will have small voxels. Grass and leaves sway in the wind, and water flows in rivers.
 
-In MC, it is sometimes annoying that the blocks are big, and you can't make something out of blocks that falls and slides down hills.
-
 [Skip to details](#details)
 
 ## What I want the game to be like
@@ -85,11 +83,12 @@ There are many types of materials like:
 * Water, Oil
 * Salt
 * Ores and gems and [minerals](https://en.wikipedia.org/wiki/List_of_minerals): Iron, Gold, Diamond, Copper, Ruby, Sapphire, Amethyst, Aluminum, Aquamarine, Emerald, Azurite, Quartz, Calcite, Feldspar, Gypsum, Garnet, Graphite, Hematite (iron ore), Jadeite (Jade), Nephrite, Lazurite, Pyrite, Magnetite (iron ore), Onyx, Opal, Purpurite, Carnelian, Amber, Turqoise, ...
-See [Sandboxels](https://sandboxels.r74n.com) for more types of materials (elements).
 * Glass, Paper, Concrete, Hardened Clay
 * Plastic (PET, HDPE, PVC, LDPE, PP, PS, PC)
 * Dye (red, orange, yellow, lime, green, cyan, blue, purple, magenta, black, white)
 * Wool, Cotton, Linen, Silk
+
+See [Sandboxels](https://sandboxels.r74n.com) for more types of materials (elements).
 
 They can also be mixed together. For example:
 * A voxel with `{soil:1, water:1}` is mud.
@@ -211,11 +210,7 @@ It could use a convolutional NN or graph NN to decide whether to compress an are
 
 # End
 
-I tried to make a voxel game a few times since Mar 2024.  
-A few days before March 18, I discovered [John Lin's voxel engine](https://www.youtube.com/@johnlin9665).  
-Many days later, I started developing [Leafbuild](https://thingmaker.us.eu.org/lfbd/prealpha-0.1.0.html) ([source code](https://github.com/aaaathing/websitethingmaker/tree/main/public/lfbd)) (Mar 17 - Aug 8, 2024). But it was too hard to make engine related things like data structures have good performance and low memory usage.
-
-But it was such an awesome idea, and I sometimes still think about making it.
+I wanted to make it since March 2024, but it was too hard. I sometimes still think about making it.
 
 Maybe someone else can create the voxel engine. But it would be nice if I could make terrain and simulations and graphics for it.
 
