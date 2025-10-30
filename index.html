@@ -11,7 +11,7 @@ title: Home
     {% seo %}
     <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
   </head>
-  <body style="background-position: center; background-size: cover; background-attachment:fixed;">
+  <body>
     <div class="container-lg markdown-body">
       <a href="{{ '/' | relative_url }}"><h1 style="color:#ffbd61;">My website</h1></a>
     </div>
@@ -58,6 +58,7 @@ title: Home
 
     <script>
       let backgrounds = [
+        ["Oct 10, 2025, 2:30 PM PDT","https://pbs.twimg.com/media/FtEKNNXXwAQFIRa.jpg:large"]
         ["Sep 20, 2025, 6:09 PM PDT","https://thebusinessjournal.com/wp-content/uploads/2019/10/DSC04967-1200x800.jpg"],
         ["Sep 20, 2025, 6:33 PM PDT","https://i.ytimg.com/vi/ta4hQCjfGiE/maxresdefault.jpg"],
         ["Sep 20, 2025, 6:30 PM PDT","https://i.ytimg.com/vi/vRj0cs5W3hQ/maxresdefault.jpg"],
@@ -74,7 +75,17 @@ title: Home
         ["May 12, 2025"/*copied from old website*/,"https://images.stockcake.com/public/e/f/4/ef4b86d8-f9f8-43af-ab0e-2baf15abc8cc_large/starry-forest-night-stockcake.jpg"],
       ]
 
+      document.body.style.backgroundSize = "cover"
+      document.body.style.backgroundPosition = "center"
+      document.body.style.backgroundAttachment = "fixed"
+      document.body.style.transition = "background-image 1s ease-in-out"
+
       let chooseBgTimeout
+      let bgText = document.createElement("small")
+      bgText.style.position = "fixed", bgText.style.bottom = "0", bgText.style.right = "0"
+      bgText.style.background = "#0008", bgText.style.color = "white"
+      bgText.style.padding = "4px"
+      document.body.appendChild(bgText)
       function chooseBg(){
         let selected, n = Math.random()
         let chance = 1 // it mostly likely chooses the first one
@@ -88,6 +99,7 @@ title: Home
         if(selected){
           backgrounds.push(selected) //add it to the back
           document.body.style.backgroundImage = "url("+selected[1]+")"
+          bgText.textContent = selected[0]+" background"
         }
         clearTimeout(chooseBgTimeout)
         chooseBgTimeout = setTimeout(chooseBg,1000*60)
