@@ -1,112 +1,162 @@
----
-title: Home
----
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {% seo %}
-    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
-  </head>
-  <body>
-    <div class="container-lg markdown-body">
-      <a href="{{ '/' | relative_url }}"><h1 style="color:#ffbd61;">My website</h1></a>
-    </div>
-    <style>
-      /* Header/logo Title */
-      .header {
-        padding: 80px;
-        text-align: center;
-        background: #ffbd61aa;
-        color: rgb(95, 73, 0);
+{% seo %}
+<link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
+</head>
+
+<body>
+<div class="container-lg markdown-body">
+  <a href="{{ '/' | relative_url }}"><h1 style="color:#ffbd61;">My website</h1></a>
+</div>
+<style>
+  .header {
+    padding: 4rem 1rem;
+    text-align: center;
+    background: #ffbd61cc;
+    color: rgb(95, 73, 0);
+  }
+  .lists{
+    margin-top:1rem;
+    padding: 1rem;
+    background: #fffc;
+    border-radius: 8px;
+
+    display:flex;
+    justify-content:center;
+    flex-direction:row;
+  }
+  .lists > div{
+    margin:0 20px;
+    text-align:center;
+    display: flex;
+    flex-direction: column;
+  }
+  .lists > div > *{
+    margin:4px 0px;
+  }
+</style>
+<div class="header">
+  <h1 style="font-size: 40px;">My website</h1>
+  <span>newer website created in Jul 2025</span>
+</div>
+
+<div class="lists">
+  <div>
+    <a href="https://thingmaker.us.eu.org">thingmaker's older website</a>
+    <a onclick="sendMsg()" href="#">send message to me</a>
+  </div>
+  <div>
+    <b>Profiles</b>
+    <a href="https://scratch.mit.edu/users/2-people">scratch</a> <a href="https://replit.com/@thingMaker">replit</a> <a href="https://github.com/aaaathing/">github</a>
+    minecraft username: Aretorangtwo
+  </div>
+</div>
+<script>
+  function sendMsg(){
+    let msg = prompt("message")
+    if(!msg) return
+    let who = prompt("who are you")
+    fetch("https://script.google.com/macros/s/AKfycbxAEIeNzzrUBimqqgL3DC0bCz77kiyJC4h8-qcgiBP8s8JcJ-s1tvQAEFEGRp1MjlZeLw/exec",{method:"POST",body: "from my-website-2025, "+who+": "+msg}).then(r=>r.text()).then(alert).catch(alert)
+  }
+</script>
+
+<style>
+  .post-grid {
+    margin: 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .post-card {
+    padding: 1.25rem 1.5rem;
+    border: 1px solid #d3d3d3;
+    border-radius: 8px;
+    background: #fffc;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .post-card h2 {
+    font-size: 1.25rem;
+    margin: 0 0 0.25rem;
+  }
+
+  .post-card time {
+    font-size: 0.9rem;
+    opacity: 0.5;
+  }
+
+  .post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+</style>
+<div class="post-grid">
+  {% assign posts = site.pages | where: "layout", "post" | reverse %}
+  {% for post in posts %}
+    <a class="post-card" href="{{ post.url | relative_url }}">
+      <h2>{{ post.title }}</h2>
+      <time>{{ post.date | date_to_string }}</time>
+    </a>
+  {% endfor %}
+</div>
+
+<script>
+  let backgrounds = [
+    ["Oct 10, 2025, 2:30 PM PDT","https://pbs.twimg.com/media/FtEKNNXXwAQFIRa.jpg:large"],
+    ["Sep 20, 2025, 6:09 PM PDT","https://thebusinessjournal.com/wp-content/uploads/2019/10/DSC04967-1200x800.jpg"],
+    ["Sep 20, 2025, 6:33 PM PDT","https://i.ytimg.com/vi/ta4hQCjfGiE/maxresdefault.jpg"],
+    ["Sep 20, 2025, 6:30 PM PDT","https://i.ytimg.com/vi/vRj0cs5W3hQ/maxresdefault.jpg"],
+    ["Sep 2, 2025","https://striresearch.si.edu/rainforest/wp-content/uploads/sites/17/2019/11/cloud-habitat-slideshow-2_3.jpg"],
+    ["Sep 3, 2025, 4:42 PM PDT", "https://images.squarespace-cdn.com/content/v1/5cb3ca007a1fbd45aeff89ea/1623839672405-7VB9V4KKHXW1LCU8KC65/nashville-tree-conservation-corps-maple-shade.jpg"]
+    ["Aug 24 2025, 4:48:48 PM PDT"/*added on Sep 2, 2025*/,"https://scx2.b-cdn.net/gfx/news/hires/2019/1-restorenatur.jpg"],
+    // Aug 19 2025, 4:11:01 PM PDT, https://extension.unh.edu/resource/shrublands
+    ["Aug 19, 2025","https://images.squarespace-cdn.com/content/v1/54f74f23e4b0952b4e0011c0/1473991024529-FDDN5AFFB2ILJ43JW7UD/ke17ZwdGBToddI8pDm48kKAwwdAfKsTlKsCcElEApLR7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UegTYNQkRo-Jk4EWsyBNhwKrKLo5CceA1-Tdpfgyxoog5ck0MD3_q0rY3jFJjjoLbQ/image-asset.jpeg"],
+    //["Aug 19 2025, 4:07:18 PM PDT"/*added on Sep 2, 2025*/,"https://images.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvNDc5NDY5MDYvNmY0ZWEyZDY4MmNlM2ZiZThhMTE1MmIxMzU2ZmE4NGYuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjoxMDgwLCJoZWlnaHQiOjcwMCwiZml0IjoiY292ZXIifSwicm90YXRlIjpudWxsLCJqcGVnIjp7InRyZWxsaXNRdWFudGlzYXRpb24iOnRydWUsIm92ZXJzaG9vdERlcmluZ2luZyI6dHJ1ZSwib3B0aW1pc2VTY2FucyI6dHJ1ZSwicXVhbnRpc2F0aW9uVGFibGUiOjN9fX0"],
+    ["Jun 21 2025, 2:05:10 PM PDT"/*added on Sep 2, 2025*/,"https://i.pinimg.com/1200x/99/d7/90/99d790708246cfaecf80a047b4931980.jpg"],
+    ["Jun 12 2025, 5:03:09 PM PDT"/*added on Sep 2, 2025*/,"https://sondoongcave.info/wp-content/uploads/2022/03/ho-troi.png"],
+    ["Jun 12 2025, 4:59:10 PM PDT"/*added on Sep 2, 2025*/,"https://cache.desktopnexus.com/thumbseg/35/35032-bigthumbnail.jpg"],
+    ["Jun 3 2025, 6:37:18 PM PDT"/*added on Sep 2, 2025*/,"https://cdn.sanity.io/images/oyzyxja8/v2/7f5713f69dee53f64ae5bf456cc3ec14787c26a2-1700x2000.jpg"],
+    ["May 12, 2025"/*copied from old website*/,"https://images.stockcake.com/public/e/f/4/ef4b86d8-f9f8-43af-ab0e-2baf15abc8cc_large/starry-forest-night-stockcake.jpg"],
+  ]
+
+  document.body.style.backgroundSize = "cover"
+  document.body.style.backgroundPosition = "center"
+  document.body.style.backgroundAttachment = "fixed"
+  document.body.style.transition = "background-image 1s ease-in-out"
+
+  let chooseBgTimeout
+  let bgText = document.createElement("small")
+  bgText.style.position = "fixed", bgText.style.bottom = "0", bgText.style.right = "0"
+  bgText.style.background = "#0008", bgText.style.color = "white"
+  bgText.style.padding = "4px"
+  document.body.appendChild(bgText)
+  function chooseBg(){
+    let selected, n = Math.random()
+    let chance = 1 // it mostly likely chooses the first one
+    for(let i=0; i<backgrounds.length; i++){
+      chance *= 0.75
+      if(n > chance){
+        selected = backgrounds.splice(i,1)[0]
+        break
       }
-    </style>
-    <div class="header">
-    <div class="container-lg px-3 markdown-body">
-      <h1 style="font-size: 40px;">thingmaker's website 2025</h1>
-      Since Jul 2025<br>
-      <a href="https://thingmaker.us.eu.org">Old website</a><br>
-      Profiles: <a href="https://scratch.mit.edu/users/2-people">scratch</a> • <a href="https://replit.com/@thingMaker">replit</a> • <a href="https://github.com/aaaathing/">github</a> • <button onclick="sendMsg()">send message</button>
-    </div>
-    </div>
-    <script>
-      function sendMsg(){
-        let msg = prompt("message")
-        if(!msg) return
-        let who = prompt("who are you")
-        fetch("https://script.google.com/macros/s/AKfycbxAEIeNzzrUBimqqgL3DC0bCz77kiyJC4h8-qcgiBP8s8JcJ-s1tvQAEFEGRp1MjlZeLw/exec",{method:"POST",body: "from my-website-2025, "+who+": "+msg}).then(r=>r.text()).then(alert).catch(alert)
-      }
-    </script>
-    
-    <div class="container-lg px-3 my-5 markdown-body">
+    }
+    if(selected){
+      backgrounds.push(selected) //add it to the back
+      document.body.style.backgroundImage = "url("+selected[1]+")"
+      bgText.textContent = selected[0]+" background"
+    }
+    clearTimeout(chooseBgTimeout)
+    chooseBgTimeout = setTimeout(chooseBg,1000*60)
+  }
+  chooseBg()
+  document.querySelector(".header").addEventListener("click",chooseBg)
+</script>
 
-      <div>
-        {% assign posts = site.pages | where: "layout", "post" | reverse %}
-        {% for post in posts %}
-          <a href="{{ post.url | relative_url }}">
-            <div style="margin-bottom:16px; padding:16px; border: 1px solid lightgray; background:#fffa;">
-              {{ post.title }} <br>
-              <span style="opacity:0.5">{{ post.date | date_to_string }}</span>
-            </div>
-          </a>
-        {% endfor %}
-      </div>
-    </div>
-
-    <script>
-      let backgrounds = [
-        ["Oct 10, 2025, 2:30 PM PDT","https://pbs.twimg.com/media/FtEKNNXXwAQFIRa.jpg:large"],
-        ["Sep 20, 2025, 6:09 PM PDT","https://thebusinessjournal.com/wp-content/uploads/2019/10/DSC04967-1200x800.jpg"],
-        ["Sep 20, 2025, 6:33 PM PDT","https://i.ytimg.com/vi/ta4hQCjfGiE/maxresdefault.jpg"],
-        ["Sep 20, 2025, 6:30 PM PDT","https://i.ytimg.com/vi/vRj0cs5W3hQ/maxresdefault.jpg"],
-        ["Sep 2, 2025","https://striresearch.si.edu/rainforest/wp-content/uploads/sites/17/2019/11/cloud-habitat-slideshow-2_3.jpg"],
-        ["Sep 3, 2025, 4:42 PM PDT", "https://images.squarespace-cdn.com/content/v1/5cb3ca007a1fbd45aeff89ea/1623839672405-7VB9V4KKHXW1LCU8KC65/nashville-tree-conservation-corps-maple-shade.jpg"]
-        ["Aug 24 2025, 4:48:48 PM PDT"/*added on Sep 2, 2025*/,"https://scx2.b-cdn.net/gfx/news/hires/2019/1-restorenatur.jpg"],
-        // Aug 19 2025, 4:11:01 PM PDT, https://extension.unh.edu/resource/shrublands
-        ["Aug 19, 2025","https://images.squarespace-cdn.com/content/v1/54f74f23e4b0952b4e0011c0/1473991024529-FDDN5AFFB2ILJ43JW7UD/ke17ZwdGBToddI8pDm48kKAwwdAfKsTlKsCcElEApLR7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UegTYNQkRo-Jk4EWsyBNhwKrKLo5CceA1-Tdpfgyxoog5ck0MD3_q0rY3jFJjjoLbQ/image-asset.jpeg"],
-        //["Aug 19 2025, 4:07:18 PM PDT"/*added on Sep 2, 2025*/,"https://images.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvNDc5NDY5MDYvNmY0ZWEyZDY4MmNlM2ZiZThhMTE1MmIxMzU2ZmE4NGYuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjoxMDgwLCJoZWlnaHQiOjcwMCwiZml0IjoiY292ZXIifSwicm90YXRlIjpudWxsLCJqcGVnIjp7InRyZWxsaXNRdWFudGlzYXRpb24iOnRydWUsIm92ZXJzaG9vdERlcmluZ2luZyI6dHJ1ZSwib3B0aW1pc2VTY2FucyI6dHJ1ZSwicXVhbnRpc2F0aW9uVGFibGUiOjN9fX0"],
-        ["Jun 21 2025, 2:05:10 PM PDT"/*added on Sep 2, 2025*/,"https://i.pinimg.com/1200x/99/d7/90/99d790708246cfaecf80a047b4931980.jpg"],
-        ["Jun 12 2025, 5:03:09 PM PDT"/*added on Sep 2, 2025*/,"https://sondoongcave.info/wp-content/uploads/2022/03/ho-troi.png"],
-        ["Jun 12 2025, 4:59:10 PM PDT"/*added on Sep 2, 2025*/,"https://cache.desktopnexus.com/thumbseg/35/35032-bigthumbnail.jpg"],
-        ["Jun 3 2025, 6:37:18 PM PDT"/*added on Sep 2, 2025*/,"https://cdn.sanity.io/images/oyzyxja8/v2/7f5713f69dee53f64ae5bf456cc3ec14787c26a2-1700x2000.jpg"],
-        ["May 12, 2025"/*copied from old website*/,"https://images.stockcake.com/public/e/f/4/ef4b86d8-f9f8-43af-ab0e-2baf15abc8cc_large/starry-forest-night-stockcake.jpg"],
-      ]
-
-      document.body.style.backgroundSize = "cover"
-      document.body.style.backgroundPosition = "center"
-      document.body.style.backgroundAttachment = "fixed"
-      document.body.style.transition = "background-image 1s ease-in-out"
-
-      let chooseBgTimeout
-      let bgText = document.createElement("small")
-      bgText.style.position = "fixed", bgText.style.bottom = "0", bgText.style.right = "0"
-      bgText.style.background = "#0008", bgText.style.color = "white"
-      bgText.style.padding = "4px"
-      document.body.appendChild(bgText)
-      function chooseBg(){
-        let selected, n = Math.random()
-        let chance = 1 // it mostly likely chooses the first one
-        for(let i=0; i<backgrounds.length; i++){
-          chance *= 0.75
-          if(n > chance){
-            selected = backgrounds.splice(i,1)[0]
-            break
-          }
-        }
-        if(selected){
-          backgrounds.push(selected) //add it to the back
-          document.body.style.backgroundImage = "url("+selected[1]+")"
-          bgText.textContent = selected[0]+" background"
-        }
-        clearTimeout(chooseBgTimeout)
-        chooseBgTimeout = setTimeout(chooseBg,1000*60)
-      }
-      chooseBg()
-      document.querySelector(".header").addEventListener("click",chooseBg)
-    </script>
-    
-  </body>
+</body>
 </html>
