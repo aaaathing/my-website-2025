@@ -35,19 +35,10 @@ The terrain will have tall mountains and valleys and long rivers. The forests ar
 
 [capslpop](https://www.youtube.com/@capslpop)
 
-<details><summary>This one is kind of ugly but simulates tree growth</summary>
-<a href="https://www.youtube.com/watch?v=Hc3sb6lx0ag"><img src="https://i.ytimg.com/vi/Hc3sb6lx0ag/hq720.jpg" loading="lazy"></a>
-</details>
-
 <img src="https://github.com/weigert/SimpleHydrology/blob/master/screenshots/side5.png?raw=true" loading="lazy">
 
 <img src="https://digital4planet.org/wp-content/uploads/sites/83/2021/05/old-growth-forest-with-rotting-tree-trunk-covered-3Y39CX3-1.jpg" style="filter:brightness(1.25)" loading="lazy">
 <img src="https://assets.simpleviewinc.com/simpleview/image/upload//v1/clients/roanoke/SV11033107V_431_e585f91b-359b-44f4-93b9-70b310b7b3dc.jpg" loading="lazy">
-<details><summary>more</summary>
-<img src="https://www.roadsidesecrets.com/wp-content/uploads/sanborn_county_park_campground.jpg" loading="lazy">
-<img src="https://supportparks.org/wp-content/uploads/2019/09/5AB5AFDE-4DC6-44AE-940B-967CEA2E5BA9-1024x767.jpg" loading="lazy">
-</details>
-<img src="https://www.hikingautism.com/uploads/7/3/2/0/7320989/4-p1160272_orig.jpeg" loading="lazy">
 <img src="https://mnfi.anr.msu.edu/element-images/1000/Cave-3859.jpg" loading="lazy">
 <img src="https://lh3.googleusercontent.com/IEvDqLVBQO8Ef8qMfTllNGDSwb-sTnZO7mHG6HrH-NfBGRopn4MEz1r6DU5Vih2nL3361-6pK2ukbWXBCVqJmAqN2DB0P-Xi5SwyLZnl7GYEV7EDANljDORJNnm-ACc6PoklHBhPqRE=w2661-h1995-no" loading="lazy">
 <details><summary>more</summary>
