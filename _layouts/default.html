@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
   </head>
   <body>
-    <div class="container-lg markdown-body">
+    <nav class="container-lg markdown-body">
       <a href="{{ '/' | relative_url }}"><h1 style="color:#ffbd61;">My website</h1></a>
-    </div>
+    </nav>
     <div class="container-lg px-3 my-5 markdown-body">
       {% if page.date %}
       <span style="opacity:0.5">{{ page.date | date_to_string }}</span>

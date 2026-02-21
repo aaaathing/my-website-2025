@@ -1,0 +1,17 @@
+---
+permalink: index.json
+note: this just turns the posts into json format
+---
+{% assign posts = site.pages | where: "layout", "post" | sort: "date" | reverse %}
+{
+{% for post in posts %}
+"{{ post.url | relative_url }}":{
+	"name":"{{ post.title }}",
+	"created":"{{ post.date }}"
+},
+{% endfor %}
+"":{
+	"name":"My new website",
+	"created":"Jul 2025"
+}
+}

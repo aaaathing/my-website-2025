@@ -10,15 +10,23 @@ created: Jan 5, 2026
         font-family: Arial, sans-serif;
         background: #000;
         color: #eee;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-image: url("https://i.redd.it/u5k8oe05drz81.jpg");
     }
 
     button {
-        font-size: 16px;
         padding: 10px 18px;
         cursor: pointer;
         margin-bottom: 30px;
         background: #333;
-        color:gray;
+        color:lightgray;
+    }
+    #message{
+        display: inline-block;
+        color:lightgray;
+        background:#3338;
     }
 </style>
 </head>
@@ -26,21 +34,21 @@ created: Jan 5, 2026
 
 <div style="text-align:center">
     <button id="start">Start Audio Capture</button><br>
-    <canvas id="meter" width="420" height="200"></canvas><br>
-    <pre style="opacity:0.5" id="message"></pre>
+    <pre id="message"></pre><br>
+    <canvas id="canvas" width="1200" height="600"></canvas><br>
 </div>
 
 <script>
 const startBtn = document.getElementById("start");
-const canvas = document.getElementById("meter");
+const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-const message = document.querySelector("#message")
+const message = document.getElementById("message")
 
 const audioContext = new AudioContext({});
 
 const analyser = audioContext.createAnalyser();
 analyser.fftSize = 2048;
-analyser.smoothingTimeConstant = 0.5
+analyser.smoothingTimeConstant = 0.25
 const freqData = new Float32Array(analyser.frequencyBinCount);
 const slowFreq = new Float32Array(analyser.frequencyBinCount);
 
@@ -87,59 +95,76 @@ async function initConn(){
 let fastLoudness = 0, slowLoudness = 0
 let avgLowBeat = 0, avgHighBeat = 0
 let randomBeatTimer = 0, nextRandomBeat = 20
-let shown = false
+let avgLowVolume = 0, avgHighVolume = 0
+let visualLowBeat = 0, visualHighBeat = 0
+let shown = true
 function updateAudio() {
     analyser.getFloatFrequencyData(freqData)
     const nyquist = audioContext.sampleRate / 2;
-    const lowStart = Math.floor(40 / nyquist * freqData.length);
-    const lowEnd   = Math.floor(120 / nyquist * freqData.length);
+    const lowEnd   = Math.floor(150 / nyquist * freqData.length);
 
     const {max} = Math
 
-    let lowSum = 0, highSum = 0, volume = 0
-    for (let i = lowStart; i < freqData.length; i++) {
+    let lowSum = 0, highSum = 0, lowVolume = 0, highVolume = 0
+    for (let i = 0; i < freqData.length; i++) {
         let freq = freqData[i] = dbToLinear(freqData[i])
-        //volume += freq
+        if(i < lowEnd) lowVolume += freq
+        else highVolume += freq
         slowFreq[i] += (freq - slowFreq[i]) * 0.4
         let change = freq - slowFreq[i]
-        if (change < slowFreq[i] * 0.15) continue;
-        if(i < lowEnd) lowSum += change
-        else highSum += change
+        if (change > slowFreq[i] * 0.15){
+            if(i < lowEnd) lowSum += change
+            else highSum += change
+        }
     }
 
     let lowBeat = max(lowSum,0)*100
     let highBeat = max(highSum,0)*100
-    avgLowBeat += (max(lowBeat,1)-avgLowBeat) * (avgLowBeat<lowBeat?0.5:0.05)
-    avgHighBeat += (max(highBeat,1)-avgHighBeat) * (avgHighBeat<highBeat?0.5:0.05)
+    avgLowBeat += (max(lowBeat,1)-avgLowBeat) * (avgLowBeat<lowBeat?0.1:0.05)
+    avgHighBeat += (max(highBeat,1)-avgHighBeat) * (avgHighBeat<highBeat?0.1:0.05)
     lowBeat /= avgLowBeat
     highBeat /= avgHighBeat
 
+    avgLowVolume += (lowVolume-avgLowVolume)*0.05
+    avgHighVolume += (highVolume-avgHighVolume)*0.05
+
     randomBeatTimer++
-    if(highBeat>0.75) randomBeatTimer = 0
+    if(highBeat>0.85) randomBeatTimer = 0
     if(randomBeatTimer > nextRandomBeat){
         nextRandomBeat = Math.random()*40+20
         randomBeatTimer = -Math.random()*10 // beat lasts for random amount of time
     }
-    let highBeat_randomBeat = randomBeatTimer < 0 ? 0.75 : highBeat
+    let highBeat_randomBeat = (randomBeatTimer < 0 && -randomBeatTimer%4<2) ? 0.85 : highBeat
 
-    if(conn) conn.send(lowBeat+","+highBeat_randomBeat)
+    if(conn){
+        let b = (lowBeat+highBeat_randomBeat)*0.35
+        conn.send(b+","+b)
+    }
 
-    if(shown){
+    if(shown && !document.hidden){
     // Draw
     const w = canvas.width;
     const h = canvas.height;
 
     ctx.clearRect(0, 0, w, h);
 
+    ctx.fillStyle = `rgba(${avgLowVolume*4000},${(avgLowVolume+avgHighVolume)*400},${avgHighVolume*4000},0.8)`
+    ctx.beginPath();
+    ctx.arc(w/2, h/2, 150+(avgLowVolume+avgHighVolume)*400, 0, Math.PI * 2);
+    ctx.fill()
+
+    visualLowBeat = Math.max(lowBeat, visualLowBeat * 0.85);
+    visualHighBeat = Math.max(highBeat, visualHighBeat * 0.75);
+    drawChangingCircles(visualLowBeat, 300)
+    drawChangingCircles(visualHighBeat, 260, 100)
+
     /*ctx.fillStyle="#ccc"
     for (let i = 0; i < freqData.length; i++) {
         ctx.fillRect(0,i,(freqData[i]-slowFreq[i])*10000,1)
     }*/
 
-	drawMeter(120, 0, lowBeat, "lowBeat", 1, "#a55");
-	drawMeter(220, 0, highBeat, "highBeat", 1, "#55a");
-	drawMeter(20, 10, avgLowBeat, "avgLowBeat", 10, "#400")
-	drawMeter(320, 10, avgHighBeat, "avgHighBeat", 10, "#008")
+	//drawMeter(w/2-50, 50, lowBeat, "lowBeat", 1, "#a55");
+	//drawMeter(w/2+50, 50, highBeat_randomBeat, "highBeat", 1, "#55a");
     }
 	
 
@@ -149,11 +174,11 @@ function updateAudio() {
 canvas.onclick = () => shown = !shown
 
 function drawMeter(x, y, amount, title, scale=1, color="#aaa") {
-    const height = canvas.height - 45;
+    const height = 150;
     const width = 50;
 
     // Label
-    ctx.fillStyle = "gray";
+    ctx.fillStyle = "lightgray";
     ctx.font = "14px monospace";
     ctx.fillText(title, x, y+height+16);
     ctx.fillText(amount.toFixed(4), x, y+height+32)
@@ -168,6 +193,34 @@ function drawMeter(x, y, amount, title, scale=1, color="#aaa") {
     ctx.strokeRect(x, y, width, height);
 }
 
+let time = 0
+function drawChangingCircles(beat, baseHue, offset=0) {
+  time++
+  const {width, height} = canvas
+
+  const circleCount = 5;
+
+  for (let i = 0; i < circleCount; i++) {
+    const t = time * 0.002 + i + offset;
+
+    const x = width / 2 + Math.sin(t) * width * 0.4;
+    const y = height / 2 + Math.cos(t * 1.2) * height * 0.4;
+
+    const baseRadius = 30 + Math.sin(t * 2) * 8;
+    const radius = baseRadius + beat * baseRadius * 1; // 💥 beat punch
+
+    const hue = baseHue + Math.sin(t * 34)*10;
+
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fillStyle = `hsla(${hue}, 100%, 60%, 0.75)`;
+    //ctx.shadowColor = ctx.fillStyle;
+    //ctx.shadowBlur = 20 + beat * 50;
+    ctx.fill();
+  }
+  //ctx.shadowBlur = 0
+}
+
 
 message.textContent = `cd ${location.pathname.substring(0,location.pathname.lastIndexOf("/"))}; source .venv/bin/activate; python a.py`
 
@@ -177,10 +230,8 @@ function goto(x){document.querySelector('#browser').src=x; startCapture()}
 
 <div style="position:absolute; left:0; bottom:0">
 <button onclick="goto('https://bandcamp.com/EmbeddedPlayer/album=944225423/size=large/')">e</button>
-<button onclick="goto('https://tommustbe12.com/soundtrack/album1/')">t1</button>
-<button onclick="goto('https://tommustbe12.com/soundtrack/')">t</button>
 <br>
-<iframe id="browser" width="150" height="400" style="border:none" referrerpolicy="no-referrer"></iframe>
+<iframe id="browser" width="150" height="400" style="border:none" referrerpolicy="no-referrer"></iframe><br>
 </div>
 
 </body>

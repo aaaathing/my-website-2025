@@ -8,7 +8,7 @@ SAMPLE_RATE = 2000
 BLOCK_SIZE = int(SAMPLE_RATE/20)
 WAVE = np.array([1.0, 1.0, -1.0, -1.0], dtype=np.float32)
 
-state = [1.0, 1.0]
+state = [0.0, 0.0]
 
 lock = threading.Lock()
 
